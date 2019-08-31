@@ -1,0 +1,20 @@
+<mat-toolbar class="BarraMenu" class="blue darken-4 white-text"> 
+        <button mat-icon-button color="white-text" class="btn-menu-sidenav hide-on-large-only" (click)="ToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+              </button>
+              
+              Oferta academica   </mat-toolbar>
+
+<mat-sidenav-container  class="sidenav-container-main">
+    <mat-sidenav mode="side" [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidenav-main" class="sidenav-main">
+        <sidenav-content></sidenav-content>
+    </mat-sidenav>
+   
+   
+    <mat-sidenav-content> 
+            <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  
+
+</mat-sidenav-container>
+

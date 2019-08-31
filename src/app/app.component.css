@@ -1,0 +1,21 @@
+.sidenav-container-main {
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+}
+
+.sidenav-main {
+    width: 260px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+}
+
+.btn-menu-sidenav:focus {
+    background: none !important; 
+}
+
