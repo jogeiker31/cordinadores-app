@@ -1,4 +1,4 @@
-import {MatButtonModule, MatToolbarModule, MatTableModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule} from '@angular/material';
+import {MatButtonModule, MatToolbarModule, MatTableModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, MatRadioModule} from '@angular/material';
 
 
 export const materials = [
@@ -8,5 +8,6 @@ export const materials = [
     MatToolbarModule,
     MatTableModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatRadioModule
 ];

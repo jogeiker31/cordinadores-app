@@ -4,34 +4,35 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { components, dialogs } from '../assets/js/Components'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HorarioComponent } from './Components/horario/horario.component';
-import { SidenavContentComponent } from './Components/sidenav-content/sidenav-content.component';
-import { InicioComponent } from './Components/inicio/inicio.component';
-import { ProfesoresComponent } from './Components/profesores/profesores.component';
-
 
 import { Rutas } from '../assets/js/Routes'
 import { materials } from 'src/assets/js/materials';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HorarioComponent,
-    SidenavContentComponent,
-    InicioComponent,
-    ProfesoresComponent
+    components,
+
   ],
   imports: [
     Rutas,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    materials
+    materials,
+    FormsModule
+     
     
   ],
   providers: [],
+  entryComponents: [
+    dialogs
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
