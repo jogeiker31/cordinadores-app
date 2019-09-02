@@ -26,6 +26,8 @@ export class HorarioComponent implements OnInit {
       height: '350px',
       data: {hora,dia,materia}
     });
+
+  
   
   }
 
