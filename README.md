@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Instalacion  
+usa ` npm install`  para que se cargue todos los paquetes y librerias necesarias para correr la app
+
+## Iniciar
+
+usa ` npm run electron`  para que haga un build de angular y corra en electron js 
+esta es cada vez que hay un cambio nuevo, para que no haya errores al abrir electron sin hacer un build de angular 
+
