@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
- {{data.materia}} <br>
+ {{getNameOfMateria(data.materia) }} <br>
  <h6> {{data.dia}} - {{data.hora.hora}}</h6> 
 </h1>
 <div mat-dialog-content>
@@ -9,8 +9,8 @@
     aria-labelledby="Materias"
     class="materias-radio"
     [(ngModel)]="materiaSelected">
-    <mat-radio-button class="example-radio-button" *ngFor="let materia of materias" [value]="materia">
-      {{materia}}
+    <mat-radio-button class="example-radio-button" *ngFor="let materia of materias" [value]="materia.codigo_materia">
+      {{materia.nombre_mat}}
     </mat-radio-button>
   </mat-radio-group>
 </div>
