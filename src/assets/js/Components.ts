@@ -4,6 +4,8 @@ import { SidenavContentComponent } from 'src/app/Components/sidenav-content/side
 import { InicioComponent } from 'src/app/Components/inicio/inicio.component';
 import { ProfesoresComponent } from 'src/app/Components/profesores/profesores.component';
 import { AsignarMateriaComponent } from 'src/app/Components/dialog/asignar-materia/asignar-materia.component';
+import { MateriasComponent } from 'src/app/Components/materias/materias.component';
+import { ReloadComponent } from 'src/app/Components/reload/reload.component';
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -11,6 +13,8 @@ export const components = [AppComponent,
     InicioComponent,
     ProfesoresComponent,
     AsignarMateriaComponent,
+    MateriasComponent,
+    ReloadComponent
     ]
 
 export const dialogs = [AsignarMateriaComponent]

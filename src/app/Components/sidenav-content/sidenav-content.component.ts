@@ -15,6 +15,7 @@ export class SidenavContentComponent implements OnInit {
   links = [
     {url:'/horario',nombre:'Horario'},
     {url:'/profesores',nombre:'Profesores'},
+    {url: '/materias',nombre:'materias'}
     
   ]
   

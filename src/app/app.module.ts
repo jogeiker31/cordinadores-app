@@ -9,7 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { Rutas } from '../assets/js/Routes'
 import { materials } from 'src/assets/js/materials';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -24,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     materials,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
      
     
   ],
