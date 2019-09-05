@@ -6,6 +6,7 @@ import { ProfesoresComponent } from 'src/app/Components/profesores/profesores.co
 import { AsignarMateriaComponent } from 'src/app/Components/dialog/asignar-materia/asignar-materia.component';
 import { MateriasComponent } from 'src/app/Components/materias/materias.component';
 import { ReloadComponent } from 'src/app/Components/reload/reload.component';
+import { SeccionesComponent } from 'src/app/Components/secciones/secciones.component';
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -14,7 +15,8 @@ export const components = [AppComponent,
     ProfesoresComponent,
     AsignarMateriaComponent,
     MateriasComponent,
-    ReloadComponent
+    ReloadComponent,
+    SeccionesComponent
     ]
 
 export const dialogs = [AsignarMateriaComponent]
