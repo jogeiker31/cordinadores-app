@@ -19,3 +19,11 @@
     background: none !important; 
 }
 
+.mat-toolbar-single-row {
+    background-color: rgb(8, 29, 51) !important;
+}
+
+.mat-drawer {
+    background-color: rgb(21, 32, 43) !important;
+    color: rgba(0,0,0,.87);
+}

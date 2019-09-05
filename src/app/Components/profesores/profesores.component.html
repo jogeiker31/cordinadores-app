@@ -1,5 +1,131 @@
+<div class="blue" style="width:100%;height:100%">
 
-<!-- modificado por jogeiker -->
-<p>
-  Modificado por DIOS
-</p>
+
+
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Profesor
+    </mat-panel-title>
+    <mat-panel-description>
+      Registrar un profesor
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+ 
+ 
+  <div class="row">
+    <form class="col s12" [formGroup]="profesoresForm" (ngSubmit)="guardarProfesor()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="ci_profesor"  id="ci" type="text" required class="validate">
+          <label for="ci">Cedula de Identidad</label>
+          <div *ngIf="ci_profesor.invalid && (ci_profesor.dirty || ci_profesor.touched)" class=" red-text  text-darken-4" >
+              <div *ngIf="ci_profesor.errors.required"  >
+                La C.I es requerida.
+              </div>
+              <div *ngIf="ci_profesor.errors.maxlength"  >
+                El codigo no puede tener mas de 8 digitos
+              </div>
+              <div *ngIf="ci_profesor.errors.pattern && !ci_profesor.errors.maxlength"  >
+                La celula de identidad no puede contener letras u otros caracteres. ejemplo "12345678"
+              </div>
+            </div>
+        </div>
+        
+        
+        <div class="input-field col s6">
+          <input formControlName="correo_profesor" id="correo" type="email" class="validate">
+          <label for="correo">Correo</label>
+          <div *ngIf="correo_profesor.invalid && (correo_profesor.dirty || correo_profesor.touched)" class=" red-text  text-darken-4" >
+            <div *ngIf="correo_profesor.errors.required"  >
+              El Correo es requerido.
+            </div> 
+            <div *ngIf="correo_profesor.errors.email"  >
+              El Correo tiene un formato erroneo. ejemplo "pedro@gmail.com"
+            </div>     
+          </div>
+        </div>
+        
+      </div>
+      
+      
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="nombre_profesor" id="nombre" type="text" min="0" max="4" class="validate" value="0">
+          <label for="nombre">Nombre</label>
+          <div *ngIf="nombre_profesor.invalid && (nombre_profesor.dirty || nombre_profesor.touched)" class=" red-text  text-darken-4" >
+            <div *ngIf="nombre_profesor.errors.required"  >
+              El nombre es requerido
+            </div>  
+          </div>
+        </div>
+      
+      
+        <div class="input-field col s6">
+          <input formControlName="apellido_profesor" id="apellido" type="text" min="0" max="4" class="validate" value="0">
+          <label for="apellido">Apellido</label>
+          <div *ngIf="apellido_profesor.invalid && (apellido_profesor.dirty || apellido_profesor.touched)" class=" red-text  text-darken-4" >
+            <div *ngIf="apellido_profesor.errors.required"  >
+              El apellido es requerido
+            </div>  
+          </div>
+        </div>
+      
+        
+      </div>
+    
+
+      
+      <button class="btn waves-effect waves-light  light-blue darken-4" type="submit" [disabled]="!profesoresForm.valid">Guardar
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+        
+</mat-expansion-panel>
+
+
+  <div class="input-field container">
+    <input  type="text" (keyup)="applyFilter($event.target.value)" id="filter">
+    <label for="filter">Busqueda avanzada</label> 
+  </div>
+
+  <div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource"  matSort>
+
+  <ng-container matColumnDef="ci">
+    <th mat-header-cell *matHeaderCellDef> C.I </th>
+    <td mat-cell *matCellDef="let profesor"> {{profesor.ci_profesor}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="nom_prof">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let profesor"> {{profesor.nombre_profesor}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="ape_prof">
+    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+    <td mat-cell *matCellDef="let profesor"> {{profesor.apellido_profesor}} </td>
+  </ng-container>
+
+ 
+  <ng-container matColumnDef="correo_prof">
+    <th mat-header-cell *matHeaderCellDef> Correo </th>
+    <td mat-cell *matCellDef="let profesor"> {{profesor.correo_profesor}} </td>
+  </ng-container>
+
+  
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+</div>
