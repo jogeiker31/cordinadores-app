@@ -5,13 +5,18 @@ import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { materias } from 'src/assets/DB/materias';
 
 
+
+<<<<<<< HEAD
 const materias = [
   {codigo_materia: 'MAT-123456',nombre_mat:'Base de datos',semestre_mat:"05S",horas_teo: 3, horas_pra:2,horas_lab:0,uc:4},
   {codigo_materia: 'MAT-222333',nombre_mat:'diseño de sistemas',semestre_mat:"05S",horas_teo: 3, horas_pra:3,horas_lab:0,uc:4},
   {codigo_materia: 'MAT-345678',nombre_mat:'optimizacion no lineal',semestre_mat:"05S",horas_teo: 4, horas_pra:3,horas_lab:0,uc:4}
 ]
+=======
+>>>>>>> 59b67c59beebe9011af76b9ba15843d357e29e0a
 
 @Component({
   selector: 'app-materias',
