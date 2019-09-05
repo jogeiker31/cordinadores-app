@@ -9,6 +9,14 @@ import { materias } from 'src/assets/DB/materias';
 
 
 
+<<<<<<< HEAD
+const materias = [
+  {codigo_materia: 'MAT-123456',nombre_mat:'Base de datos',semestre_mat:"05S",horas_teo: 3, horas_pra:2,horas_lab:0,uc:4},
+  {codigo_materia: 'MAT-222333',nombre_mat:'diseño de sistemas',semestre_mat:"05S",horas_teo: 3, horas_pra:3,horas_lab:0,uc:4},
+  {codigo_materia: 'MAT-345678',nombre_mat:'optimizacion no lineal',semestre_mat:"05S",horas_teo: 4, horas_pra:3,horas_lab:0,uc:4}
+]
+=======
+>>>>>>> 59b67c59beebe9011af76b9ba15843d357e29e0a
 
 @Component({
   selector: 'app-materias',
@@ -16,8 +24,7 @@ import { materias } from 'src/assets/DB/materias';
   styleUrls: ['./materias.component.css']
 })
 export class MateriasComponent implements OnInit {
-
-
+  
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -29,7 +36,7 @@ export class MateriasComponent implements OnInit {
   }
 
 
-  displayedColumns: string[] = ['codigo', 'materia', 'horas_teo', 'horas_pra','horas_lab', 'horas_tot'];
+  displayedColumns: string[] = ['codigo', 'materia','semestre', 'horas_teo', 'horas_pra','horas_lab', 'horas_tot'];
   dataSource = new MatTableDataSource(materias);
 
   applyFilter(filterValue: string) {
@@ -42,6 +49,7 @@ export class MateriasComponent implements OnInit {
   materiasForm  = new FormGroup({
     codigo_materia: new FormControl('',[Validators.required,Validators.maxLength(9),Validators.pattern('^[A-Z]{3}\-[0-9]{5}$')]),
     nombre_mat: new FormControl('',[Validators.required]),
+    semestre_mat:new FormControl('',[Validators.required,Validators.max(3)]),
     horas_teo: new FormControl('',[Validators.min(0),Validators.max(4)]),
     horas_pra: new FormControl('',[Validators.min(0),Validators.max(4)]),
     horas_lab: new FormControl('',[Validators.min(0),Validators.max(4)]),
@@ -50,6 +58,7 @@ export class MateriasComponent implements OnInit {
 
   get codigo_materia() {return this.materiasForm.get('codigo_materia')}
   get nombre_mat() {return this.materiasForm.get('nombre_mat')}
+  get semestre_mat() {return this.materiasForm.get('semestre_mat')}
   get horas_teo() {return this.materiasForm.get('horas_teo')}
   get horas_pra() {return this.materiasForm.get('horas_pra')}
   get horas_lab() {return this.materiasForm.get('horas_lab')}

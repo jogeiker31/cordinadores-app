@@ -1,0 +1,99 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Seccion
+    </mat-panel-title>
+    <mat-panel-description>
+      agrega una nueva Seccion
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+ 
+ 
+  <div class="row">
+    <form class="col s12" [formGroup]="seccionForm" (ngSubmit)="guardarSeccion()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input formControlName="nsemestre"  id="polla" type="text" required class="validate">
+          <label for="polla">semestre</label>
+          <div *ngIf="nsemestre.invalid && (nsemestre.dirty || nsemestre.touched)" class=" red-text  text-darken-4" >
+              <div *ngIf="nsemestre.errors.required"  >
+                La semestre es requerida.
+              </div>
+              <div *ngIf="nsemestre.errors.maxlength"  >
+                La semestre no puede tener mas de 3 digitos
+              </div>
+            </div>
+        </div>
+        
+        
+        <div class="input-field col s6">
+          <input formControlName="codigo_carr" id="polla2" type="text" class="validate">
+          <label for="polla2">codigo</label>
+          <div *ngIf="codigo_carr.invalid && (codigo_carr.dirty || codigo_carr.touched)" class=" red-text  text-darken-4" >
+            <div *ngIf="codigo_carr.errors.maxlength"  >
+              El codigo no puede tener mas de 4 digitos
+            </div>   
+          </div>
+        </div>
+        
+      </div>
+      
+      
+      <div class="row">
+        <div class="input-field col l3 m3 s6">
+          <input formControlName="seccion_tur" id="polla3" type="text" min="1" max="2" class="validate" value="1">
+          <label for="polla3">seccion</label>
+          <div *ngIf="seccion_tur.invalid && (seccion_tur.dirty || seccion_tur.touched)" class=" red-text  text-darken-4" >
+            <div *ngIf="seccion_tur.errors.min"  >
+              Secciones de 1 en adelante
+            </div>  
+            <div *ngIf="seccion_tur.errors.maxlength"  >
+              La seccion no puede tener mas de 2 digitos
+            </div> 
+          </div>
+        </div>
+      </div>
+      
+
+
+      
+  <button class="btn waves-effect waves-light  light-blue darken-4" type="submit" [disabled]="!seccionForm.valid">Guardar
+    <i class="material-icons right">send</i>
+  </button>
+    </form>
+  </div>
+        
+</mat-expansion-panel>
+
+
+  <div class="input-field container">
+    <input  type="text" (keyup)="applyFilter($event.target.value)" id="filter">
+    <label for="filter">Busqueda avanzada</label> 
+  </div>
+
+  <div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource"  matSort>
+
+  <ng-container matColumnDef="nsemestre">
+    <th mat-header-cell *matHeaderCellDef> semestre </th>
+    <td mat-cell *matCellDef="let seccion"> {{seccion.nsemestre}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="codigo_carr">
+    <th mat-header-cell *matHeaderCellDef> codigo </th>
+    <td mat-cell *matCellDef="let seccion"> {{seccion.codigo_carr}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="seccion_tur">
+    <th mat-header-cell *matHeaderCellDef> Seccion_turno </th>
+    <td mat-cell *matCellDef="let seccion"> {{seccion.seccion_tur}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
