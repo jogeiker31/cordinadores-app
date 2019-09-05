@@ -6,17 +6,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { materias } from 'src/assets/DB/materias';
+declare const M;
 
 
-
-<<<<<<< HEAD
-const materias = [
-  {codigo_materia: 'MAT-123456',nombre_mat:'Base de datos',semestre_mat:"05S",horas_teo: 3, horas_pra:2,horas_lab:0,uc:4},
-  {codigo_materia: 'MAT-222333',nombre_mat:'diseño de sistemas',semestre_mat:"05S",horas_teo: 3, horas_pra:3,horas_lab:0,uc:4},
-  {codigo_materia: 'MAT-345678',nombre_mat:'optimizacion no lineal',semestre_mat:"05S",horas_teo: 4, horas_pra:3,horas_lab:0,uc:4}
-]
-=======
->>>>>>> 59b67c59beebe9011af76b9ba15843d357e29e0a
 
 @Component({
   selector: 'app-materias',
@@ -36,6 +28,19 @@ export class MateriasComponent implements OnInit {
   }
 
 
+  semestres = [
+    {nombre:'Primero',numero:1},
+    {nombre:'Segundo',numero:2},
+    {nombre:'Tercero',numero:3},
+    {nombre:'Cuarto',numero:4},
+    {nombre:'Quinto',numero:5},
+    {nombre:'Sexto',numero:6},
+    {nombre:'Septimo',numero:7},
+    {nombre:'Octavo',numero:8},
+    {nombre:'Noveno',numero:9},
+  ]
+
+
   displayedColumns: string[] = ['codigo', 'materia','semestre', 'horas_teo', 'horas_pra','horas_lab', 'horas_tot'];
   dataSource = new MatTableDataSource(materias);
 
@@ -49,7 +54,7 @@ export class MateriasComponent implements OnInit {
   materiasForm  = new FormGroup({
     codigo_materia: new FormControl('',[Validators.required,Validators.maxLength(9),Validators.pattern('^[A-Z]{3}\-[0-9]{5}$')]),
     nombre_mat: new FormControl('',[Validators.required]),
-    semestre_mat:new FormControl('',[Validators.required,Validators.max(3)]),
+    semestre_mat:new FormControl('',[Validators.required]),
     horas_teo: new FormControl('',[Validators.min(0),Validators.max(4)]),
     horas_pra: new FormControl('',[Validators.min(0),Validators.max(4)]),
     horas_lab: new FormControl('',[Validators.min(0),Validators.max(4)]),

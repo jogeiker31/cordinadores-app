@@ -12,7 +12,7 @@
   <div class="row">
     <form class="col s12" [formGroup]="materiasForm" (ngSubmit)="guardarMateria()">
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           <input formControlName="codigo_materia"  id="codigo" type="text" required class="validate">
           <label for="codigo">Codigo</label>
           <div *ngIf="codigo_materia.invalid && (codigo_materia.dirty || codigo_materia.touched)" class=" red-text  text-darken-4" >
@@ -29,7 +29,7 @@
         </div>
         
         
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           <input formControlName="nombre_mat" id="nombre" type="text" class="validate">
           <label for="nombre">Materia</label>
           <div *ngIf="nombre_mat.invalid && (nombre_mat.dirty || nombre_mat.touched)" class=" red-text  text-darken-4" >
@@ -40,15 +40,15 @@
         </div>
 
 
-        <div class="input-field col s6">
-          <input formControlName="semestre_mat" id="polla" type="text" class="validate">
-          <label for="polla">Semestre</label>
-          <div *ngIf="semestre_mat.invalid && (semestre_mat.dirty || semestre_mat.touched)" class=" red-text  text-darken-4" >
-            <div *ngIf="semestre_mat.errors.max" >
-              El semestre no puede llevar mas 3 digitos
-            </div>   
-          </div>
-        </div>
+
+        <mat-form-field class="col s4 select_per"  >
+          <mat-label>Semestre </mat-label>
+          <mat-select formControlName="semestre_mat" class="select_per_in" id='select'>
+            <mat-option *ngFor="let semestre of semestres" [value]="semestre.numero"  >
+              {{semestre.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         
       </div>
       

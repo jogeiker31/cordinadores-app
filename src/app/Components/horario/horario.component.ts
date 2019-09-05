@@ -12,16 +12,32 @@ import { materias } from 'src/assets/DB/materias';
 })
 export class HorarioComponent implements OnInit {
 
-  displayedColumns: string[] = ['Hora', 'Lunes', 'Martes', 'Miercoles','Jueves','Viernes','Sabado'];
-  dataSource = horario_data;
+  info = {
+    seccion: '06S-2416-D1',
+    semestre: 'SEXTO',
+    carrera: 'ING. DE SISTEMAS',
+    turno: 'DIURNO',
+    aula: '19',
+    semestre_num:6
+
+  }
+
+ 
+  
+
+  
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
     
+ 
+    
   }
 
+  
 
+  
 
   getNameOfMateria(code){
     const materia = materias.filter((mat)=>{
@@ -33,14 +49,7 @@ export class HorarioComponent implements OnInit {
   }
   
 
-  info = {
-    seccion: '06S-2416-D1',
-    semestre: 'SEXTO',
-    carrera: 'ING. DE SISTEMAS',
-    turno: 'DIURNO',
-    aula: '19'
-
-  }
+  
 
 
   elemento(hora,dia,materia){
@@ -53,5 +62,15 @@ export class HorarioComponent implements OnInit {
   
   
   }
+
+  columnasHorario: string[] = ['Hora', 'Lunes', 'Martes', 'Miercoles','Jueves','Viernes','Sabado'];
+  HorarioData = horario_data;
+  
+  
+  columnasMaterias: string[] = ['codigo', 'materia','profesor','h_t','h_p','h_l','h_tot'];
+  
+  MateriasData = materias.filter((mat)=> {
+    return mat.semestre_mat == this.info.semestre_num;
+  })
 
 }
