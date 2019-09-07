@@ -4,3 +4,7 @@ export const materias = [
     {codigo_materia: 'MAT-345678',nombre_mat:'optimizacion no lineal',horas_teo: 4, horas_pra:3,horas_lab:0,uc:4,semestre_mat:6}
   ]
 
+
+export const materiasPorSeccion = []
+
+

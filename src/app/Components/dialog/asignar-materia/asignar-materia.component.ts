@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { horario_data } from 'src/assets/DB/horario';
-import { materias } from 'src/assets/DB/materias';
+import { materiasPorSeccion, materias } from 'src/assets/DB/materias';
 
 export interface DialogData {
   hora: object,
-  dia : string
+  dia : string,
+  seccion
   
 }
 
@@ -17,10 +18,15 @@ export interface DialogData {
 export class AsignarMateriaComponent implements OnInit {
 
 
-  ngOnInit() {
+ async ngOnInit() {
+
+  this.materiasPS = await materiasPorSeccion.filter( async (materia)=>{
+    return materia.codigo_materia == this.data.seccion
+  })
+
   }
  
-  materias = materias;
+  materiasPS;
  
   materiaSelected: string;
 
@@ -68,5 +74,16 @@ export class AsignarMateriaComponent implements OnInit {
       return materia[0].nombre_mat
     }
   }
+
+  getNameOfMateriaById(id){
+    let materia_id = materiasPorSeccion.filter((mat_id)=>{
+      return mat_id.id_mat_sec == id
+    })
+
+    if(materia_id[0]){
+      let nombre = this.getNameOfMateria(materia_id[0].codigo_materia)
+      return nombre;
+    }
+   }
 
 }

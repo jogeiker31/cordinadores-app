@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AsignarMateriaComponent } from '../dialog/asignar-materia/asignar-materia.component';
 import { horario_data } from 'src/assets/DB/horario';
-import { materias } from 'src/assets/DB/materias';
+import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
+import { profesores } from 'src/assets/DB/profesores';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
+import { async } from 'q';
 
 
 @Component({
@@ -22,22 +26,10 @@ export class HorarioComponent implements OnInit {
 
   }
 
- 
-  
 
   
 
-  constructor(public dialog: MatDialog) {}
-
-  ngOnInit() {
     
- 
-    
-  }
-
-  
-
-  
 
   getNameOfMateria(code){
     const materia = materias.filter((mat)=>{
@@ -47,30 +39,80 @@ export class HorarioComponent implements OnInit {
       return materia[0].nombre_mat
     }
   }
+
+
+   getNameOfMateriaById(id){
+    let materia_id = materiasPorSeccion.filter((mat_id)=>{
+      return mat_id.id_mat_sec == id
+    })
+
+    if(materia_id[0]){
+      let nombre = this.getNameOfMateria(materia_id[0].codigo_materia)
+      return nombre;
+    }
+   }
+
+    
   
-
   
-
-
+  
   elemento(hora,dia,materia){
+    let seccion = this.info.seccion
     const asignarMateriaDialog = this.dialog.open(AsignarMateriaComponent, {
       width: '450px',
       height: '350px',
-      data: {hora,dia,materia}
+      data: {hora,dia,materia,seccion}
     });
 
   
   
   }
 
+  openDialogMateriaSec(){
+
+    let seccion = this.info.seccion;
+    let semestre = this.info.semestre_num
+    const asignarMateriaSecDialog = this.dialog.open(AsignarMateriaSeccionComponent, {
+      width: '450px',
+      height: '350px',
+      data: {seccion,semestre}
+    })
+  }
+
+
+  getNameOfProfesor(code){
+   let profesor = profesores.filter((prof)=>{
+    return prof.ci_profesor == code
+
+   })
+   if(profesor[0]){
+     return `${profesor[0].nombre_profesor} ${profesor[0].apellido_profesor}`
+   }
+
+  }
+
+
+
+
+  constructor(public dialog: MatDialog) {}
+
+  async ngOnInit() {
+
+     this.MateriasData = await materiasPorSeccion.filter( async (materia)=>{
+      return materia.codigo_materia == this.info.seccion
+    })
+    
+    
+  }
+
+
+
   columnasHorario: string[] = ['Hora', 'Lunes', 'Martes', 'Miercoles','Jueves','Viernes','Sabado'];
   HorarioData = horario_data;
   
   
-  columnasMaterias: string[] = ['codigo', 'materia','profesor','h_t','h_p','h_l','h_tot'];
+  columnasMaterias: string[] = ['id', 'materia','profesor'];
+  MateriasData;
   
-  MateriasData = materias.filter((mat)=> {
-    return mat.semestre_mat == this.info.semestre_num;
-  })
 
 }

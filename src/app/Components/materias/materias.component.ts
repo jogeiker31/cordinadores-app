@@ -55,10 +55,10 @@ export class MateriasComponent implements OnInit {
     codigo_materia: new FormControl('',[Validators.required,Validators.maxLength(9),Validators.pattern('^[A-Z]{3}\-[0-9]{5}$')]),
     nombre_mat: new FormControl('',[Validators.required]),
     semestre_mat:new FormControl('',[Validators.required]),
-    horas_teo: new FormControl('',[Validators.min(0),Validators.max(4)]),
-    horas_pra: new FormControl('',[Validators.min(0),Validators.max(4)]),
-    horas_lab: new FormControl('',[Validators.min(0),Validators.max(4)]),
-    uc: new FormControl('',[Validators.min(0),Validators.max(5)])
+    horas_teo: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
+    horas_pra: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
+    horas_lab: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
+    uc: new FormControl('',[Validators.min(0),Validators.max(5),Validators.required])
   });
 
   get codigo_materia() {return this.materiasForm.get('codigo_materia')}
