@@ -11,24 +11,7 @@ export interface Horario {
   
   }
   
- export const horario_data: Horario[] = [
-    {hora: '7:00 a 7:45', lunes: null , martes: null, miercoles: null,jueves: null, viernes : null, sabado:null,seccion:'06S-2614-D1',aula:null},
-    {hora: '7:45 a 8:30', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '8:30 a 9:15', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '9:15 a 10:00', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '10:00 a 10:45', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '10:45 a 11:30', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '11:30 a 12:15', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '12:15 a 13:00', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '13:00 a 13:45', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '13:45 a 14:30', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '14:30 a 15:15', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '15:15 a 16:00', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '16:00 a 16:45', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '16:45 a 17:30', lunes: null, martes: null, miercoles: null,jueves: null, viernes : null, sabado: null,seccion:'06S-2614-D1',aula:null},
-    {hora: '7:00 a 7:45', lunes: null , martes: null, miercoles: null,jueves: null, viernes : null, sabado:null,seccion:'02S-2614-D1',aula:null}
-  
-  ];
+ export const horario_data: Horario[] = [];
 
 
   export const secciones = [{
