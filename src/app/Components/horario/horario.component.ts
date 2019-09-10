@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AsignarMateriaComponent } from '../dialog/asignar-materia/asignar-materia.component';
-import { horario_data } from 'src/assets/DB/horario';
+import { horario_data, seccionSelected, saveHour } from 'src/assets/DB/horario';
 import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
 import { profesores } from 'src/assets/DB/profesores';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -16,16 +16,7 @@ import { async } from 'q';
 })
 export class HorarioComponent implements OnInit {
 
-  info = {
-    seccion: '06S-2416-D1',
-    semestre: 'SEXTO',
-    carrera: 'ING. DE SISTEMAS',
-    turno: 'DIURNO',
-    aula: '19',
-    semestre_num:6
-
-  }
-
+  info = seccionSelected[0]
 
   
 
@@ -57,7 +48,7 @@ export class HorarioComponent implements OnInit {
   
   
   elemento(hora,dia,materia){
-    let seccion = this.info.seccion
+    let seccion = this.info.codigo_siceu
     const asignarMateriaDialog = this.dialog.open(AsignarMateriaComponent, {
       width: '450px',
       height: '350px',
@@ -70,8 +61,8 @@ export class HorarioComponent implements OnInit {
 
   openDialogMateriaSec(){
 
-    let seccion = this.info.seccion;
-    let semestre = this.info.semestre_num
+    let seccion = this.info.codigo_siceu;
+    let semestre = this.info.num_semestre
     const asignarMateriaSecDialog = this.dialog.open(AsignarMateriaSeccionComponent, {
       width: '450px',
       height: '350px',
@@ -99,16 +90,27 @@ export class HorarioComponent implements OnInit {
   async ngOnInit() {
 
      this.MateriasData = await materiasPorSeccion.filter( async (materia)=>{
-      return materia.codigo_materia == this.info.seccion
+      return materia.codigo_materia == this.info.codigo_siceu
     })
     
+
+    this.HorarioData = await horario_data.filter((data)=>{
+      return data.seccion == this.info.codigo_siceu
+    })
+
+    if(!this.HorarioData[0]){
+      await saveHour(this.info.codigo_siceu)
+      this.HorarioData = await horario_data.filter((data)=>{
+        return data.seccion == this.info.codigo_siceu
+      })
+    }
     
   }
 
 
 
   columnasHorario: string[] = ['Hora', 'Lunes', 'Martes', 'Miercoles','Jueves','Viernes','Sabado'];
-  HorarioData = horario_data;
+  HorarioData;
   
   
   columnasMaterias: string[] = ['id', 'materia','profesor'];
