@@ -13,7 +13,9 @@
   <span>Turno: {{info.turno}}</span> <br>
   <span>Seccion Siceu: {{info.codigo_siceu}}</span> <br>
   <span>Semestre: {{info.semestre}}</span> <br>
-
+  <span>Aula: {{info.Aula}} <button *ngIf="info.Aula == null" class="btn waves-effect waves-light  light-blue darken-4" type="submit" (click)="openDialogAulasSec(info)">Asignar
+    <i class="material-icons right">add</i>
+  </button>  </span> <br>
 </div>
 
 

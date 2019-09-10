@@ -7,6 +7,7 @@ import { profesores } from 'src/assets/DB/profesores';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { async } from 'q';
+import { AsignarAulaComponent } from '../dialog/asignar-aula/asignar-aula.component';
 
 
 @Component({
@@ -70,6 +71,13 @@ export class HorarioComponent implements OnInit {
     })
   }
 
+  openDialogAulasSec(seccion){
+    const asignarAulaDialog = this.dialog.open(AsignarAulaComponent, {
+      width: '450px',
+      height: '250',
+      data: {seccion}
+    })
+  }
 
   getNameOfProfesor(code){
    let profesor = profesores.filter((prof)=>{
@@ -88,6 +96,7 @@ export class HorarioComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   async ngOnInit() {
+    console.log(this.info)
 
      this.MateriasData = await materiasPorSeccion.filter( async (materia)=>{
       return materia.codigo_materia == this.info.codigo_siceu
