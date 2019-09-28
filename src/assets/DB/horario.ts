@@ -16,7 +16,7 @@ export interface Horario {
 
   export const secciones = [{
     codigo_siceu:'01S-2614-D1',
-    semestre:'PRIMERO',
+    semestre:null,
     num_semestre:1,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
@@ -24,14 +24,14 @@ export interface Horario {
   },
   {
     codigo_siceu:'02S-2614-D1',
-    semestre:'SEGUNDO',
+    semestre:null,
     num_semestre:2,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
     Aula:null
   },{
     codigo_siceu:'03S-2614-D1',
-    semestre:'TERCERO',
+    semestre:null,
     num_semestre:3,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
@@ -39,7 +39,7 @@ export interface Horario {
   },
   {
     codigo_siceu:'06S-2614-D1',
-    semestre:'SEXTO',
+    semestre:null,
     num_semestre:6,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
@@ -87,3 +87,4 @@ function minutes(minuts){
 
 
 export const aulas = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+export const semestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO','QUINTO','SEXTO','SEPTIMO','OCTAVO','NOVENO'];

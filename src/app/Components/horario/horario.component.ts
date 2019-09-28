@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { async } from 'q';
 import { AsignarAulaComponent } from '../dialog/asignar-aula/asignar-aula.component';
+import { AsignarSemestreComponent } from '../dialog/asignar-semestre/asignar-semestre.component';
 
 
 @Component({
@@ -71,6 +72,15 @@ export class HorarioComponent implements OnInit {
     })
   }
 
+
+openDialogSemestreSec(seccion){
+  const asignarSemestreDialog = this.dialog.open(AsignarSemestreComponent, {
+    width: '450px',
+    height: '250',
+    data: {seccion}
+  })
+}
+  
   openDialogAulasSec(seccion){
     const asignarAulaDialog = this.dialog.open(AsignarAulaComponent, {
       width: '450px',

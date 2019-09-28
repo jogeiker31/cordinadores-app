@@ -9,6 +9,7 @@ import { ReloadComponent } from 'src/app/Components/reload/reload.component';
 import { SeccionesComponent } from 'src/app/Components/secciones/secciones.component';
 import { AsignarMateriaSeccionComponent } from 'src/app/Components/dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { AsignarAulaComponent } from 'src/app/Components/dialog/asignar-aula/asignar-aula.component';
+import { AsignarSemestreComponent } from 'src/app/Components/dialog/asignar-semestre/asignar-semestre.component';
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -20,7 +21,8 @@ export const components = [AppComponent,
     ReloadComponent,
     SeccionesComponent,
     AsignarMateriaSeccionComponent,
-    AsignarAulaComponent
+    AsignarAulaComponent,
+    AsignarSemestreComponent
     ]
 
-export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent]
+export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent]
