@@ -15,13 +15,13 @@ export interface Horario {
 
 
   export const secciones = [{
-    codigo_siceu:'01S-2614-D1',
+    codigo_siceu:null,//revisar si funciona
     semestre:null,
-    num_semestre:1,
+    num_semestre:null,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
     Aula:null
-  },
+  }/* ,
   {
     codigo_siceu:'02S-2614-D1',
     semestre:null,
@@ -43,12 +43,12 @@ export interface Horario {
     num_semestre:6,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
-    Aula:null
-  }]
+    Aula:null 
+  }*/]
 
 
   export var seccionSelected = secciones.filter((seccion)=>{
-    return seccion.codigo_siceu == '02S-2614-D1';
+    return seccion.codigo_siceu == null;
   })
 
 
@@ -87,4 +87,7 @@ function minutes(minuts){
 
 
 export const aulas = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-export const semestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO','QUINTO','SEXTO','SEPTIMO','OCTAVO','NOVENO'];
+
+export const semestres = ['','PRIMERO','SEGUNDO','TERCERO','CUARTO','QUINTO','SEXTO','SEPTIMO','OCTAVO','NOVENO']
+export const seccioneS = ['D1','D2','D3','D4','D5']
+export const codigoCarrera = ['2614'];

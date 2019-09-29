@@ -1,7 +1,9 @@
 <h1 mat-dialog-title >
-  Asignar semestre a la seccion: {{data.seccion.codigo_siceu}} 
+  Asignar Seccion: {{data.seccion.codigo_siceu}} 
   
  </h1>
+
+
 
  <div mat-dialog-content>
 
@@ -12,16 +14,43 @@
          
           
           <div class="col s12">
-              <label> Selecciona un Semestre</label>
-            <mat-form-field class="col s12">
+              <label> Selecciona una Seccion</label>
+            <mat-form-field class="col s4">
             
-            <mat-label>Semestres</mat-label>
-            <mat-select [(ngModel)]="SemestreSelected">
+           <div>
+
+            <mat-label>Semestre</mat-label>
+            <mat-select [(ngModel)]="SemestreSelected ">
               <mat-option *ngFor="let semestre of semestres" [value]="semestre">
                 {{semestre}}
               </mat-option>
             </mat-select>
+           </div>
           </mat-form-field>
+         <!--7777777777777777777777777777777777777777777-->
+         <mat-form-field class="col s4">  
+         <div>
+
+            <mat-label>Codigo</mat-label>
+            <mat-select [(ngModel)]="CodigoSelected">
+              <mat-option *ngFor="let codigoCarrer of codigoCarrera" [value]="codigoCarrer">
+                {{codigoCarrer}}
+              </mat-option>
+            </mat-select>
+           </div>
+          </mat-form-field>
+         <!--7777777777777777777777777777777777777777777-->
+         
+         <mat-form-field class="col s4">
+                <mat-label>Seccion</mat-label>
+                <mat-select [(ngModel)]="SeccionSelected" >    
+                  <mat-option *ngFor="let seccione of seccioneS"  [value]="seccione">  
+                    {{seccione}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+           
           </div>
         
         
@@ -33,6 +62,7 @@
       
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button  cdkFocusInitial [disabled]="!SemestreSelected" (click)="asignarSemestre(data.seccion)">Aceptar</button>
+    <button mat-button  cdkFocusInitial [disabled]="!SemestreSelected  && !CodigoSelected && !SeccionSelected " 
+    (click)="asignarSemestre(data.seccion)  ">Aceptar</button>
 </div>
       

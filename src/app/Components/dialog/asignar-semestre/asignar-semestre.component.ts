@@ -1,7 +1,11 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { semestres } from 'src/assets/DB/horario';
+import { seccioneS } from 'src/assets/DB/horario';
+import { codigoCarrera } from 'src/assets/DB/horario';
+
 
 export interface AASDATA{
   seccion: object
@@ -30,18 +34,43 @@ export class AsignarSemestreComponent implements OnInit {
 
   
   SemestreSelected: string;
+  CodigoSelected: string;
+  SeccionSelected:string;
+  SemestreCorto:string;
+
+  function (){
+    for(let i in semestres ) {
+    if (semestres[i] == this.SemestreSelected) {
+      this.SemestreCorto = i.toString();
+      return this.SemestreCorto
+    }
+    
+  }
+  }
   
 
   asignarSemestre(seccion){
     seccion.semestre = this.SemestreSelected;
+    this.function()
+    seccion.codigo_siceu = '0'+ this.SemestreCorto +'S-' + this.CodigoSelected + '-' + this.SeccionSelected;
     this.onNoClick()
-  }
+  };
+
+  
+  
+  
+
 
 
   semestres;
+  seccioneS;
+  codigoCarrera;
 
   async ngOnInit() {
-    this.semestres = semestres
+    this.semestres = semestres;
+    this.seccioneS = seccioneS;
+    this.codigoCarrera = codigoCarrera;
   }
 
 }
+ 

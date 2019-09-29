@@ -61,6 +61,7 @@ export class HorarioComponent implements OnInit {
   
   }
 
+
   openDialogMateriaSec(){
 
     let seccion = this.info.codigo_siceu;
@@ -75,8 +76,8 @@ export class HorarioComponent implements OnInit {
 
 openDialogSemestreSec(seccion){
   const asignarSemestreDialog = this.dialog.open(AsignarSemestreComponent, {
-    width: '450px',
-    height: '250',
+    width: '950px',
+    height: '750',
     data: {seccion}
   })
 }
