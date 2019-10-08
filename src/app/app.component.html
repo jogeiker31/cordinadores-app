@@ -1,12 +1,12 @@
-<mat-toolbar class="BarraMenu" class="blue darken-4 white-text"> 
+<mat-toolbar class="BarraMenu" class="blue darken-4 white-text" *ngIf="loginService.userLog !== null"> 
         <button mat-icon-button color="white-text" class="btn-menu-sidenav hide-on-large-only" (click)="ToggleSidenav()">
                 <mat-icon>menu_open</mat-icon>
               </button>
               
               Oferta academica   </mat-toolbar>
 
-<mat-sidenav-container  class="sidenav-container-main">
-    <mat-sidenav mode="side" [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidenav-main" class="sidenav-main">
+<mat-sidenav-container  [class.sidenav-container-main-login]="loginService.userLog == null"  [class.sidenav-container-main]="loginService.userLog !== null" >
+    <mat-sidenav *ngIf="loginService.userLog !== null" mode="side" [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidenav-main" class="sidenav-main">
         <sidenav-content></sidenav-content>
     </mat-sidenav>
    
@@ -17,4 +17,5 @@
   
 
 </mat-sidenav-container>
+
 

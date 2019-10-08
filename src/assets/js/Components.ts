@@ -10,6 +10,9 @@ import { SeccionesComponent } from 'src/app/Components/secciones/secciones.compo
 import { AsignarMateriaSeccionComponent } from 'src/app/Components/dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { AsignarAulaComponent } from 'src/app/Components/dialog/asignar-aula/asignar-aula.component';
 import { AsignarSemestreComponent } from 'src/app/Components/dialog/asignar-semestre/asignar-semestre.component';
+import { LoginComponent } from 'src/app/Components/login/login.component';
+import { LogoutComponent } from 'src/app/Components/logout/logout.component';
+
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -22,7 +25,10 @@ export const components = [AppComponent,
     SeccionesComponent,
     AsignarMateriaSeccionComponent,
     AsignarAulaComponent,
-    AsignarSemestreComponent
+    AsignarSemestreComponent,
+    LoginComponent,
+    LogoutComponent
+    
     ]
 
 export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent]

@@ -1,5 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { LoginService } from './services/login.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+   
   mobileQuery: MediaQueryList;
 
   opened: boolean = true;
@@ -22,10 +25,10 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public loginService:LoginService) {
     this.mobileQuery = media.matchMedia('(max-width: 1000px)');
     this._mobileQueryListener = () => {
-      changeDetectorRef.detectChanges();
+      this.changeDetectorRef.detectChanges();
       if(this.mobileQuery.matches){
         this.opened = false;
       }else{
@@ -35,12 +38,20 @@ export class AppComponent {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-
-
+async ngOnInit(){
   
+  if(localStorage.length>0){
+    await this.loginService.getUserLog()
+  }
+
+}
 
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  ngAfterContentChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 }
