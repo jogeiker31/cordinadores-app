@@ -29,12 +29,36 @@
 }
 
 .mat-toolbar-single-row {
-    background-color: rgb(8, 29, 51) !important;
+    background-color: #085fa7 !important;
 }
 
 .mat-drawer {
-    background-color: rgb(21, 32, 43) !important;
+    background-color: #085fa7 !important;
     color: rgba(0,0,0,.87);
+}
+
+.eventos-ventana{
+    z-index: 999999;
+    background-color: #ffffff26;
+    padding: 0;
+    width: 90px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 25px;
+}
+
+.eventos-ventana button{
+    width: 30px;
+    color: black;
+    height: 25px;
+}:focus{
+    background-color: initial;
+}
+
+
+.eventos-ventana button mat-icon{
+    vertical-align: super !important;
 }
 
 

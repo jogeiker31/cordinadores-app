@@ -11,6 +11,7 @@ import { Rutas } from '../assets/js/Routes'
 import { materials } from 'src/assets/js/materials';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxElectronModule } from 'ngx-electron';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     materials,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxElectronModule
      
     
   ],

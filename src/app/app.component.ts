@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { LoginService } from './services/login.service';
+import { ElectronService } from 'ngx-electron';
 
 
 @Component({
@@ -10,24 +11,29 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
    
-  mobileQuery: MediaQueryList;
+  mobileQuery: MediaQueryList; // codigo Materials
 
-  opened: boolean = true;
+  opened: boolean = true; // codigo Materials
 
-  async TSN($event){
-    await (this.opened = $event);
+  async TSN($event){ // codigo Materials
+    await (this.opened = $event); // codigo Materials
+  } 
+
+
+  ToggleSidenav(){ // codigo Materials
+    this.opened = !this.opened; // codigo Materials
   }
 
+  private _mobileQueryListener: () => void; // codigo Materials
 
-  ToggleSidenav(){
-    this.opened = !this.opened;
-  }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,  // codigo Materials
+    media: MediaMatcher,  // codigo Materials
+    public loginService:LoginService, // servicio de login
+    private _electronService:ElectronService) { // Esto es para comunicarse con la API de electron desde angular 
 
-  private _mobileQueryListener: () => void;
-
-  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public loginService:LoginService) {
-    this.mobileQuery = media.matchMedia('(max-width: 1000px)');
-    this._mobileQueryListener = () => {
+    this.mobileQuery = media.matchMedia('(max-width: 1000px)'); // codigo Materials
+    this._mobileQueryListener = () => { // codigo Materials
       this.changeDetectorRef.detectChanges();
       if(this.mobileQuery.matches){
         this.opened = false;
@@ -39,15 +45,42 @@ export class AppComponent {
   }
 
 async ngOnInit(){
-  
+ 
   if(localStorage.length>0){
     await this.loginService.getUserLog()
   }
 
 }
 
+maximizado = false;
 
-  ngOnDestroy(): void {
+Minimizar(){
+  
+this._electronService.ipcRenderer.send('minimizar', 'minimizar')
+
+}
+
+Maximizar(){
+  this.maximizado= false;
+  this._electronService.ipcRenderer.send('maximizar', 'maximizar')
+  
+  this._electronService.ipcRenderer.on('maximizado',(event,args)=>{
+    this.maximizado= true;
+  })
+
+}
+
+Cerrar(){
+  this._electronService.ipcRenderer.send('cerrar', 'cerrar')
+
+}
+
+
+
+
+
+
+  ngOnDestroy(): void { // codigo Materials
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 

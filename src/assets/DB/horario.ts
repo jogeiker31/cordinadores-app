@@ -15,9 +15,9 @@ export interface Horario {
 
 
   export const secciones = [{
-    codigo_siceu:null,//revisar si funciona
-    semestre:null,
-    num_semestre:null,
+    codigo_siceu:'06S-2614-D1',//revisar si funciona
+    semestre:'SEXTO',
+    num_semestre:6,
     carrera:'ING DE SISTEMAS',
     turno:'DIURNO',
     Aula:null
@@ -48,7 +48,7 @@ export interface Horario {
 
 
   export var seccionSelected = secciones.filter((seccion)=>{
-    return seccion.codigo_siceu == null;
+    return seccion.codigo_siceu == '06S-2614-D1';
   })
 
 

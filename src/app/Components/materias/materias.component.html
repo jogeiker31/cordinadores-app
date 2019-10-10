@@ -54,7 +54,7 @@
       
       
       <div class="row">
-        <div class="input-field col l3 m3 s6">
+        <div class="input-field col l4 m4 s6">
           <input formControlName="horas_teo" id="hora_t" type="number" min="0" max="4" class="validate" value=0>
           <label for="hora_t">Horas de Teoria</label>
           <div *ngIf="horas_teo.invalid && (horas_teo.dirty || horas_teo.touched)" class=" red-text  text-darken-4" >
@@ -68,7 +68,7 @@
         </div>
       
       
-        <div class="input-field col l3 m3 s6">
+        <div class="input-field col l4 m4 s6">
           <input formControlName="horas_pra" id="hora_p" type="number" class="validate"  value=0>
           <label for="hora_p">Horas de Practica</label>
           <div *ngIf="horas_pra.invalid && (horas_pra.dirty || horas_pra.touched)" class=" red-text  text-darken-4" >
@@ -82,7 +82,7 @@
           
         </div>
       
-        <div class="input-field col l3 m3 s6">
+        <div class="input-field col l4 m4 s6">
           <input formControlName="horas_lab" id="hora_l" type="number" class="validate"  value=0>
           <label for="hora_l">Horas de laboratorio</label>
           <div *ngIf="horas_lab.invalid && (horas_lab.dirty || horas_lab.touched)" class=" red-text  text-darken-4" >
@@ -95,18 +95,7 @@
           </div>
         </div>
 
-        <div class="input-field col l3 m3 s6">
-          <input formControlName="uc" id="uc" type="number" class="validate"  value=0>
-          <label for="uc">UC</label>
-          <div *ngIf="uc.invalid && (uc.dirty || uc.touched)" class=" red-text  text-darken-4" >
-            <div *ngIf="uc.errors.min"  >
-              No puedes ingresar UC's negativas
-            </div>  
-            <div *ngIf="uc.errors.max"  >
-              Excediste las Unidades de creditos maximas
-            </div> 
-          </div>
-        </div>
+        
       </div>
 
 

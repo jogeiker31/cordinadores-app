@@ -5,7 +5,8 @@ import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { profesores } from 'src/assets/DB/profesores';
+import { ProfesoresService } from 'src/app/services/profesores.service';
+
 
 
 @Component({
@@ -15,10 +16,19 @@ import { profesores } from 'src/assets/DB/profesores';
 })
 export class ProfesoresComponent implements OnInit {
 
+  tipos = [{value:10,nombre:'TV'},
+  {value:18,nombre:'MT'},
+  {value:30,nombre:'TC'},
+  {value:38,nombre:'Dedicacion exclusiva'}]
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private fb: FormBuilder, private router:Router) { }
+  constructor(
+    private fb: FormBuilder, 
+    private router:Router, 
+    public profesoresService:ProfesoresService
+    ) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -26,8 +36,8 @@ export class ProfesoresComponent implements OnInit {
   }
 
 
-  displayedColumns: string[] = ['ci', 'nom_prof', 'ape_prof', 'correo_prof'];
-  dataSource = new MatTableDataSource(profesores);
+  displayedColumns: string[] = ['ci', 'nom_prof', 'ape_prof', 'correo_prof','h_e'];
+  dataSource = new MatTableDataSource(this.profesoresService.getProfesores());
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -38,22 +48,24 @@ export class ProfesoresComponent implements OnInit {
 
   profesoresForm  = new FormGroup({
     ci_profesor: new FormControl('',[Validators.required,Validators.maxLength(8),Validators.pattern('^[0-9]{1,8}$')]),
-    nombre_profesor: new FormControl('',[Validators.required]),
-    apellido_profesor: new FormControl('',[Validators.required]),
-    correo_profesor: new FormControl('',[Validators.email,Validators.required]),
+    nom_prof: new FormControl('',[Validators.required]),
+    ape_prof: new FormControl('',[Validators.required]),
+    cor_prof: new FormControl('',[Validators.email,Validators.required]),
+    horas_est: new FormControl('',[Validators.required])
+
     
   });
 
   get ci_profesor() {return this.profesoresForm.get('ci_profesor')}
-  get nombre_profesor() {return this.profesoresForm.get('nombre_profesor')}
-  get apellido_profesor() {return this.profesoresForm.get('apellido_profesor')}
-  get correo_profesor() {return this.profesoresForm.get('correo_profesor')}
- 
+  get nom_prof() {return this.profesoresForm.get('nom_prof')}
+  get ape_prof() {return this.profesoresForm.get('ape_prof')}
+  get cor_prof() {return this.profesoresForm.get('cor_prof')}
+ get horas_est() { return this.profesoresForm.get('horas_est')}
 
 
 
   guardarProfesor(){
-    profesores.push(this.profesoresForm.value)
+   this.profesoresService.setProfesor(this.profesoresForm.value)
     
     this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
     {

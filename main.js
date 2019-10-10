@@ -1,16 +1,26 @@
 const {app, BrowserWindow} = require('electron')
     const url = require("url");
     const path = require("path");
-
+    const { ipcMain } = require('electron')
     let mainWindow
+
+
+
+   
+    
+
+  
 
     function createWindow () {
       mainWindow = new BrowserWindow({
-        width: 800,
+        width: 1000,
+        minWidth:800,
         height: 600,
+        minHeight:600,
         webPreferences: {
           nodeIntegration: true
-        }
+        },
+        frame: false
       })
 
       mainWindow.loadURL(
@@ -25,6 +35,24 @@ const {app, BrowserWindow} = require('electron')
 
       mainWindow.on('closed', function () {
         mainWindow = null
+      })
+
+      ipcMain.on('minimizar', (event, arg) => {
+        mainWindow.minimize()
+      })
+      ipcMain.on('maximizar', (event, arg) => {
+        if(mainWindow.isMaximized()){
+          mainWindow.restore()
+          
+        }else{
+          mainWindow.maximize()
+          event.reply('maximizado','true')
+        }
+        
+      })
+      ipcMain.on('cerrar', (event, arg) => {
+        mainWindow.close()
+        
       })
 
       

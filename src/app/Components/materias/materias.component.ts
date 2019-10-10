@@ -57,8 +57,8 @@ export class MateriasComponent implements OnInit {
     semestre_mat:new FormControl('',[Validators.required]),
     horas_teo: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
     horas_pra: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
-    horas_lab: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required]),
-    uc: new FormControl('',[Validators.min(0),Validators.max(5),Validators.required])
+    horas_lab: new FormControl('',[Validators.min(0),Validators.max(4),Validators.required])
+    
   });
 
   get codigo_materia() {return this.materiasForm.get('codigo_materia')}
@@ -67,7 +67,7 @@ export class MateriasComponent implements OnInit {
   get horas_teo() {return this.materiasForm.get('horas_teo')}
   get horas_pra() {return this.materiasForm.get('horas_pra')}
   get horas_lab() {return this.materiasForm.get('horas_lab')}
-  get uc() {return this.materiasForm.get('uc')}
+ 
 
 
 

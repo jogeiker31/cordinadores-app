@@ -3,12 +3,12 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { AsignarMateriaComponent } from '../dialog/asignar-materia/asignar-materia.component';
 import { horario_data, seccionSelected, saveHour } from 'src/assets/DB/horario';
 import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
-import { profesores } from 'src/assets/DB/profesores';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { async } from 'q';
 import { AsignarAulaComponent } from '../dialog/asignar-aula/asignar-aula.component';
 import { AsignarSemestreComponent } from '../dialog/asignar-semestre/asignar-semestre.component';
+import { ProfesoresService } from 'src/app/services/profesores.service';
 
 
 @Component({
@@ -91,12 +91,9 @@ openDialogSemestreSec(seccion){
   }
 
   getNameOfProfesor(code){
-   let profesor = profesores.filter((prof)=>{
-    return prof.ci_profesor == code
-
-   })
+   let profesor = this.profesoresService.getProfesor(code);
    if(profesor[0]){
-     return `${profesor[0].nombre_profesor} ${profesor[0].apellido_profesor}`
+     return `${profesor[0].nom_prof} ${profesor[0].ape_prof}`
    }
 
   }
@@ -104,7 +101,7 @@ openDialogSemestreSec(seccion){
 
 
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public profesoresService:ProfesoresService) {}
 
   async ngOnInit() {
     console.log(this.info)

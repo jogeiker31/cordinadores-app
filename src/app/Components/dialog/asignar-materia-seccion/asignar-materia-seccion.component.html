@@ -31,7 +31,7 @@
                 <mat-label>Profesores</mat-label>
                 <mat-select formControlName="ci_profesor">
                   <mat-option *ngFor="let profesor of profesoresDisponibles" [value]="profesor.ci_profesor">
-                    CI: {{ profesor.ci_profesor }} - {{ profesor.nombre_profesor }} {{ profesor.apellido_profesor}} 
+                    CI: {{ profesor.ci_profesor }} - {{ profesor.nom_prof }} {{ profesor.ape_prof}} 
                   </mat-option>
                 </mat-select>
               </mat-form-field>
