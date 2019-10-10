@@ -14,43 +14,10 @@ export interface Horario {
  export const horario_data: Horario[] = [];
 
 
-  export const secciones = [{
-    codigo_siceu:'06S-2614-D1',//revisar si funciona
-    semestre:'SEXTO',
-    num_semestre:6,
-    carrera:'ING DE SISTEMAS',
-    turno:'DIURNO',
-    Aula:null
-  }/* ,
-  {
-    codigo_siceu:'02S-2614-D1',
-    semestre:null,
-    num_semestre:2,
-    carrera:'ING DE SISTEMAS',
-    turno:'DIURNO',
-    Aula:null
-  },{
-    codigo_siceu:'03S-2614-D1',
-    semestre:null,
-    num_semestre:3,
-    carrera:'ING DE SISTEMAS',
-    turno:'DIURNO',
-    Aula:null
-  },
-  {
-    codigo_siceu:'06S-2614-D1',
-    semestre:null,
-    num_semestre:6,
-    carrera:'ING DE SISTEMAS',
-    turno:'DIURNO',
-    Aula:null 
-  }*/]
+  
 
 
-  export var seccionSelected = secciones.filter((seccion)=>{
-    return seccion.codigo_siceu == '06S-2614-D1';
-  })
-
+ 
 
 
 

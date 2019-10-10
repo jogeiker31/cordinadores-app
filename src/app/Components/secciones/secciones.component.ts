@@ -1,24 +1,44 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {Component} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { SeccionesService } from 'src/app/services/secciones.service';
 import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
 
-/* const secciones = []
-createFormGroup(){
-  return new FormGroup({
-    semestre: new FormControl(''),
-    codigo_carrera: new FormControl(''),
-    seccion_turno: new FormControl('')
-  })
-} */
-const secciones = [{nsemestre:"01S",codigo_carr:2614,seccion_tur:"D1"},
-{nsemestre:"02S",codigo_carr:2614,seccion_tur:"D2"},
-{nsemestre:"03S",codigo_carr:2614,seccion_tur:"D3"}
-  
-]
+
+
+
+/**
+ * Food data with nested structure.
+ * Each node has a name and an optiona list of children.
+ */
+interface FoodNode {
+  name: string;
+  children?: FoodNode[];
+}
+
+const TREE_DATA: FoodNode[] = [
+  {
+    name: 'Primer semestre',
+    children: [
+      {name: '01S-2614-D1'}
+    ]
+  }, {
+    name: 'Sexto semestre',
+    children: [
+      {
+        name: '06S-2614-D1'
+      },
+    ]
+  },
+];
+
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
 
 
 @Component({
@@ -26,51 +46,45 @@ const secciones = [{nsemestre:"01S",codigo_carr:2614,seccion_tur:"D1"},
   templateUrl: './secciones.component.html',
   styleUrls: ['./secciones.component.css']
 })
-export class SeccionesComponent implements OnInit {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+export class SeccionesComponent {
 
-  constructor(private fb: FormBuilder, private router:Router) { }
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  private _transformer = (node: FoodNode, level: number) => {  // codigo materials para expandir el arbol
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
   }
 
+  treeControl = new FlatTreeControl<ExampleFlatNode>( // mas codigo materials
+      node => node.level, node => node.expandable);
 
+  treeFlattener = new MatTreeFlattener(
+      this._transformer, node => node.level, node => node.expandable, node => node.children);
 
-displayedColumns: string[] = ['nsemestre', 'codigo_carr', 'seccion_tur'];
-  dataSource = new MatTableDataSource(secciones);
-  
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener); // codigo materials :V 
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  constructor( public seccionesService:SeccionesService, private router:Router) {
+    this.dataSource.data = TREE_DATA; // esta es la data como tal 
   }
 
-  seccionForm  = new FormGroup({
-    nsemestre: new FormControl('',[Validators.required,Validators.maxLength(3)]),
-    codigo_carr: new FormControl('',[Validators.required,Validators.maxLength(4)]),
-    seccion_tur: new FormControl('',[Validators.required,Validators.maxLength(2)])
-  });
-
-  get nsemestre() {return this.seccionForm.get('nsemestre')}
-  get codigo_carr() {return this.seccionForm.get('codigo_carr')}
-  get seccion_tur() {return this.seccionForm.get('seccion_tur')}
- 
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
 
-  guardarSeccion(){
-    secciones.push(this.seccionForm.value)
-    
-    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
-    {
-      this.router.navigate(['/secciones'])
-      
-    }); 
-    
+
+   async cargarHorario(code){
+    await this.seccionesService.getSeccion(code)
+    this.router.navigateByUrl('/horario')
   }
 }
+
+
+
+
+ 
+
+  
+    
+ 

@@ -68,12 +68,11 @@ export class AsignarMateriaSeccionComponent implements OnInit {
     // esto guarda las materias por seccion 
     id += 1;
     let materia = value
-    materia.codigo_semestre = this.data.seccion
+    materia.codigo_seccion = this.data.seccion
     materia.id_mat_sec = id
     materiasPorSeccion.push(materia)
-    console.log(id)
+   
     
-
    this.onNoClick()
 
    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>

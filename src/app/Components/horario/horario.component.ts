@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AsignarMateriaComponent } from '../dialog/asignar-materia/asignar-materia.component';
-import { horario_data, seccionSelected, saveHour } from 'src/assets/DB/horario';
+import { horario_data, saveHour } from 'src/assets/DB/horario';
 import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
@@ -9,6 +9,7 @@ import { async } from 'q';
 import { AsignarAulaComponent } from '../dialog/asignar-aula/asignar-aula.component';
 import { AsignarSemestreComponent } from '../dialog/asignar-semestre/asignar-semestre.component';
 import { ProfesoresService } from 'src/app/services/profesores.service';
+import { SeccionesService } from 'src/app/services/secciones.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { ProfesoresService } from 'src/app/services/profesores.service';
 })
 export class HorarioComponent implements OnInit {
 
-  info = seccionSelected[0]
+  info = this.seccionesService.seccionSelected[0]
 
   
 
@@ -101,15 +102,19 @@ openDialogSemestreSec(seccion){
 
 
 
-  constructor(public dialog: MatDialog, public profesoresService:ProfesoresService) {}
+  constructor(public dialog: MatDialog, public profesoresService:ProfesoresService, public seccionesService:SeccionesService) {}
 
   async ngOnInit() {
-    console.log(this.info)
+    
+    this.MateriasData = []
 
-     this.MateriasData = await materiasPorSeccion.filter( async (materia)=>{
-      return materia.codigo_materia == this.info.codigo_siceu
+     this.MateriasData = await materiasPorSeccion.filter((materia)=>{ 
+      return materia.codigo_seccion === this.info.codigo_siceu
+
     })
     
+  
+
 
     this.HorarioData = await horario_data.filter((data)=>{
       return data.seccion == this.info.codigo_siceu
@@ -121,6 +126,8 @@ openDialogSemestreSec(seccion){
         return data.seccion == this.info.codigo_siceu
       })
     }
+
+    
     
   }
 

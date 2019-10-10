@@ -1,4 +1,4 @@
-import {MatButtonModule, MatToolbarModule, MatTableModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, MatRadioModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatCardModule, MatDividerModule} from '@angular/material';
+import {MatButtonModule, MatToolbarModule, MatTableModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, MatRadioModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatCardModule, MatDividerModule, MatTreeModule, MatProgressBarModule} from '@angular/material';
 
 
 export const materials = [
@@ -18,5 +18,7 @@ export const materials = [
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTreeModule,
+    MatProgressBarModule
 ];
