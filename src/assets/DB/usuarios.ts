@@ -2,8 +2,8 @@ export const coordinadores = [{
     ci_coor:'27040372',
     nom_coor:'Jogeiker',
     ape_coor:'Lizarraga',
-    usuario:'J27040372',
-    contra:'darkdemons',
+    usuario:'user',
+    contra:'user',
     correo_coor:'jogeiker1999@gmail.com'
 }]
 

@@ -1,5 +1,5 @@
 .imgbgl{
-    background: url('../../../assets/images/architectural-design-architecture-blur-316093.jpg') no-repeat center center fixed; 
+    background: url('../../../assets/images/login.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
      -moz-background-size: cover;
     -o-background-size: cover;
@@ -19,6 +19,7 @@ mat-card-action{
 
 .btn-is{
     background-color: #085fa7;
+    margin-left: 25% !important;
 }
 
 .sidenav-container-main[_ngcontent-otw-c0] {   
@@ -28,20 +29,21 @@ mat-card-action{
 .login-card{
     margin: auto;
     max-width: 500px;
-    padding: 15px;
-    height: 300px;
-    background-color: #8f8faf60;
-    color: white;
+    padding: 25px;
+    height: 70%;
+    background-color: none;
+    color: black;
+    box-shadow: none;
 }
 
 .placeholder {
-    color: white;
+    color: black;
 }
 
 
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/
-    color: white !important;
+    color: black !important;
    }.mat-form-field-underline {
     /*change color of underline*/
     background-color: #085fa7 !important;
@@ -50,8 +52,21 @@ mat-card-action{
    background-color: #085fa7 !important;;
   }.mat-form-field-label {
     /*change color of label*/
-    color: white !important;
+    color: black !important;
    }
 
 
+.login{
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.945)
+}
 
+.fh{
+    height: 100% !important;
+    /* Full Height  */
+}
+
+.mb{
+    /* Margin Button */
+    margin-bottom: 0;
+}
