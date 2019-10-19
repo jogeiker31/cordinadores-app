@@ -62,6 +62,7 @@ export class AsignarMateriaSeccionComponent implements OnInit {
 
   })
 
+
   
 
   guardarMateriaSeccion(value){

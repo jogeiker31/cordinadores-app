@@ -17,7 +17,13 @@ export class ProfesoresService {
 
 constructor() { }
 
-profesores: Profesor[] = [];
+profesores: Profesor[] = [{
+  ci_profesor:'27040372',
+  nom_prof:'jogeiker',
+  ape_prof:'lizarraga',
+  cor_prof:'jogeiker1999@gmail.com',
+  horas_est:30
+}];
 
 getProfesores(){
   return this.profesores;

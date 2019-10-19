@@ -12,6 +12,7 @@ import { AsignarAulaComponent } from 'src/app/Components/dialog/asignar-aula/asi
 import { AsignarSemestreComponent } from 'src/app/Components/dialog/asignar-semestre/asignar-semestre.component';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
+import { UsuarioIncorrectoComponent } from 'src/app/Components/dialog/usuario-incorrecto/usuario-incorrecto.component';
 
 
 export const components = [AppComponent,
@@ -27,8 +28,9 @@ export const components = [AppComponent,
     AsignarAulaComponent,
     AsignarSemestreComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    UsuarioIncorrectoComponent
     
     ]
 
-export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent]
+export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent,UsuarioIncorrectoComponent]

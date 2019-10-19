@@ -3,6 +3,8 @@ import { coordinadores } from 'src/assets/DB/usuarios';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { MatDialog } from '@angular/material';
+import { UsuarioIncorrectoComponent } from '../dialog/usuario-incorrecto/usuario-incorrecto.component';
 
 @Component({
   selector: 'login',
@@ -11,7 +13,12 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,  private router:Router, public loginService:LoginService) { }
+  constructor(
+    private fb: FormBuilder,  
+    private router:Router,
+    public loginService:LoginService,
+    public dialog: MatDialog
+    ) { }
 
   loginForm = this.fb.group({
     usuario: ['',[Validators.required]],
@@ -26,6 +33,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  usuarioIncorrecto(){
+    const usuarioIncorrectoDialog = this.dialog.open(UsuarioIncorrectoComponent, {
+      width: '350px',
+      height: '130px',
+    })
+  }
   
 
   iniciarSesion(){
@@ -44,7 +57,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/inicio')
 
     }else {
-      alert('Usuario o clave incorrecta')
+      this.usuarioIncorrecto()
     }
   }
 

@@ -19,7 +19,7 @@
                     </mat-form-field>
                   
                     <mat-form-field class="col s12">
-                      <input type="password" matInput  class="browser-default" formControlName="contra">
+                      <input type="password" matInput  class="browser-default" formControlName="contra" (keyup.enter)="iniciarSesion()">
                       <mat-placeholder class="placeholder">Contraseña</mat-placeholder>
                     </mat-form-field>
                 
