@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { coordinadores } from 'src/assets/DB/usuarios';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { MatDialog } from '@angular/material';
 import { UsuarioIncorrectoComponent } from '../dialog/usuario-incorrecto/usuario-incorrecto.component';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'login',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,  
     private router:Router,
     public loginService:LoginService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private usuariosService: UsuariosService
     ) { }
 
   loginForm = this.fb.group({
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
     if(this.loginService.userLog !== null){
       this.router.navigateByUrl('/inicio')
     }
+    
   }
 
   usuarioIncorrecto(){
@@ -41,24 +43,23 @@ export class LoginComponent implements OnInit {
   }
   
 
-  iniciarSesion(){
-    let user = coordinadores.filter((cor)=>{
-      return (cor.usuario == this.loginForm.value.usuario &&  cor.contra == this.loginForm.value.contra)
-    })
-
-    if(user.length > 0){
-      let info = {
-        id:user[0].ci_coor,
-        user: user[0].usuario
-      }
-      
-      this.loginService.setUserLog(info)
-     
-      this.router.navigateByUrl('/inicio')
-
+  async iniciarSesion(){
+    let info = this.loginForm.value; // guardamos el valor del formulario en la variable info
+    let user = await this.usuariosService.authUsuario(info.usuario,info.contra) // le pedimos al servicio usuariosService que verifique si el usuario que desea ingresar al sistema existe, si no existe devuelve null
+    
+    if( user !== null){ // si no es null entonces permite la entrada al sistema
+      this.loginService.setUserLog(user) // le manda al loginService la informacion del usuario que ingreso al sistema
+      this.router.navigateByUrl('/inicio') // redirecciona al inicio de la app
     }else {
-      this.usuarioIncorrecto()
+      this.usuarioIncorrecto() // si es null entonces se desplegara la ventana modal indicando el error
     }
+
+   
+      
+     
+      
+
+    
   }
 
 }

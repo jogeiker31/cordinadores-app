@@ -27,8 +27,12 @@
 .btn-menu-sidenav:focus {
     background: none !important; 
 }
+.btn-menu-sidenav {
+    -webkit-app-region: no-drag;
+}
 
 .mat-toolbar-single-row {
+  
     background-color: #085fa7 !important;
 }
 
@@ -38,6 +42,8 @@
 }
 
 .eventos-ventana{
+    /* no-drag es para que los botones encima del div draggable funcionen */
+    -webkit-app-region: no-drag; 
     z-index: 999999;
     background-color: #ffffff26;
     padding: 0;
@@ -62,3 +68,21 @@
 }
 
 
+.drag {
+    /* lo que dice webkit region drag, es de la api de electron, para permitir arrastar la ventana */
+    -webkit-app-region: drag;
+    position: fixed;
+    height: 20px;
+    width: 100%;
+    z-index: 1;
+    background-color: transparent;
+    top: 0;
+
+}
+
+.coordinador {
+    right: 0;
+    bottom: 1px;
+    color: white;
+    font-size: 13px;
+}

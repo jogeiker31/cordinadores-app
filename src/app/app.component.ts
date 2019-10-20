@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, AfterContentChecked } from '@angular/core
 import { MediaMatcher } from '@angular/cdk/layout';
 import { LoginService } from './services/login.service';
 import { ElectronService } from 'ngx-electron';
+import { UsuariosService } from './services/usuarios.service';
 
 
 @Component({
@@ -30,7 +31,9 @@ export class AppComponent {
     private changeDetectorRef: ChangeDetectorRef,  // codigo Materials
     media: MediaMatcher,  // codigo Materials
     public loginService:LoginService, // servicio de login
-    private _electronService:ElectronService) { // Esto es para comunicarse con la API de electron desde angular 
+    private _electronService:ElectronService, // Esto es para comunicarse con la API de electron desde angular 
+    private usuariosService: UsuariosService
+    ) { 
 
     this.mobileQuery = media.matchMedia('(max-width: 1000px)'); // codigo Materials
     this._mobileQueryListener = () => { // codigo Materials
@@ -49,18 +52,19 @@ async ngOnInit(){
   if(localStorage.length>0){
     await this.loginService.getUserLog()
   }
-
 }
-
+// variables de control
+coordinador;
 maximizado = false;
 
 Minimizar(){
-  
-this._electronService.ipcRenderer.send('minimizar', 'minimizar')
+  // para minimizar la ventana principal
+this._electronService.ipcRenderer.send('minimizar', 'minimizar') // envia un evento main.js de electron
 
 }
 
 Maximizar(){
+  // para maximizar  la ventana principal
   this.maximizado= false;
   this._electronService.ipcRenderer.send('maximizar', 'maximizar')
   
@@ -71,6 +75,7 @@ Maximizar(){
 }
 
 Cerrar(){
+  // para cerrar la ventana principal
   this._electronService.ipcRenderer.send('cerrar', 'cerrar')
 
 }

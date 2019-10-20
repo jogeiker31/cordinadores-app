@@ -1,10 +1,12 @@
-<mat-toolbar class="BarraMenu" class="blue darken-4 white-text" *ngIf="loginService.userLog !== null"> 
-        <button mat-icon-button color="white-text" class="btn-menu-sidenav hide-on-large-only" (click)="ToggleSidenav()">
+<div class="drag"></div> <!-- este div es para poder arrastar la ventana -->
+
+<mat-toolbar class="BarraMenu " class="blue darken-4 white-text" *ngIf="loginService.userLog !== null"> 
+        <button mat-icon-button color="white-text" class="btn-menu-sidenav hide-on-large-only " (click)="ToggleSidenav()">
                 <mat-icon>menu_open</mat-icon>
               </button>
               
               Oferta academica  
-            
+              <div class="coordinador" *ngIf="coordinador"> {{coordinador.nom_coor}} {{coordinador.ape_coor}} </div>
             </mat-toolbar>
 
 <mat-sidenav-container  [class.sidenav-container-main-login]="loginService.userLog == null"  [class.sidenav-container-main]="loginService.userLog !== null" >
@@ -20,7 +22,7 @@
 
 </mat-sidenav-container>
 
-<mat-card class="eventos-ventana">
+<mat-card class="eventos-ventana no-drag">
 
     <button class="browser-default" mat-icon-button (click)="Minimizar()"><mat-icon>remove
         </mat-icon></button>
