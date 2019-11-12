@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxElectronModule } from 'ngx-electron';
 
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { NgxElectronModule } from 'ngx-electron';
     materials,
     FormsModule,
     ReactiveFormsModule,
-    NgxElectronModule
+    NgxElectronModule,
+    MatButtonModule
      
     
   ],

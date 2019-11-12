@@ -36,7 +36,7 @@ export class ProfesoresComponent implements OnInit {
   }
 
 
-  displayedColumns: string[] = ['ci', 'nom_prof', 'ape_prof', 'correo_prof','h_e'];
+  displayedColumns: string[] = ['ci', 'nom_prof', 'ape_prof', 'correo_prof','h_e','boton','botonE'];
   dataSource = new MatTableDataSource(this.profesoresService.getProfesores());
 
   applyFilter(filterValue: string) {
@@ -74,4 +74,148 @@ export class ProfesoresComponent implements OnInit {
     }); 
     
   }
+
+  async borrarProfesor(code){
+  
+    await this.profesoresService.deleteProfesor(code)
+  
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/profesores'])
+      
+    }); 
+  }
+
+  edit:false;//para los botones de editar, si es false no es editable
+tomarCI:any; 
+
+
+profesoresE  = new FormGroup({
+  CI_prof: new FormControl('',[Validators.maxLength(8),Validators.pattern('^[0-9]{1,8}$')]),
+  nombre_prof: new FormControl(''),
+  apellido_prof: new FormControl(''),
+  correo_prof: new FormControl('',[Validators.email]),
+  hora_T: new FormControl(''),
+  
+});
+
+CI:string;
+nombre:string;
+apellido:number;
+correo:number;
+horaT:number;
+
+
+//CI
+async editarCI(code){
+  if(this.profesoresE.value.CI_prof == '' ){
+    
+    await this.profesoresService.updateCi(code,this.tomarCI)//no esta leyendo el valor REVISAR
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+
+  }else{
+
+  await this.profesoresService.updateCi(code,this.profesoresE.value.CI_prof)
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+                                } //el del else      
+}
+
+
+//Nombre   
+async editarNombre(code){
+  if(this.profesoresE.value.nombre_prof == '' ){
+    
+    await this.profesoresService.updateNombre(code,this.nombre)//no esta leyendo el valor REVISAR
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+
+  }else{
+
+  await this.profesoresService.updateNombre(code,this.profesoresE.value.nombre_prof)
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+                                } //el del else      
+}
+//Apellido
+async editarApellido(code){
+  if(this.profesoresE.value.apellido_prof == '' ){
+    await this.profesoresService.updateApellido(code,this.apellido)
+
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/profesores'])
+      
+    }); 
+  }else{
+    await this.profesoresService.updateApellido(code,this.profesoresE.value.apellido_prof)
+
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/profesores'])
+      
+    }); 
+  }// else
+}
+//correo
+async editarCorreo(code){
+  if(this.profesoresE.value.correo_prof == '' ){
+    await this.profesoresService.updateHorasT(code,this.correo)
+
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/profesores'])
+      
+    }); 
+}else{
+  await this.profesoresService.updateHorasT(code,this.profesoresE.value.correo_prof)
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+}//else
+}
+
+
+//Horas Trabajo
+async editarHorasT(code){
+  if(this.profesoresE.value.hora_T == '' ){
+    await this.profesoresService.updateHorasT(code,this.horaT)
+
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/profesores'])
+      
+    }); 
+ 
+}else{
+  await this.profesoresService.updateHorasT(code,this.profesoresE.value.hora_T)
+
+  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  {
+    this.router.navigate(['/profesores'])
+    
+  }); 
+}//else
+}
+
 }

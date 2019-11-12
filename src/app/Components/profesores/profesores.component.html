@@ -107,33 +107,139 @@
 
   <ng-container matColumnDef="ci">
     <th mat-header-cell *matHeaderCellDef> C.I </th>
-    <td mat-cell *matCellDef="let profesor"> {{profesor.ci_profesor}} </td>
+    <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}"> 
+        <div *ngIf="tomarCI == profesor.ci_profesor && edit "  >
+            <form class="col s1" [formGroup]="profesoresE"  >
+          <input type="text " matInput formControlName="CI_prof"   placeholder="{{profesor.ci_profesor}} " >
+          
+      </form>
+      </div>
+      <div *ngIf="tomarCI != profesor.ci_profesor && edit">
+          <span  >{{profesor.ci_profesor}}</span>
+
+      </div>
+        <div *ngIf="!edit" >
+            <span  >{{profesor.ci_profesor}}</span>
+          </div>
+      <!--         {{profesor.ci_profesor}}  
+ -->    </td>
   </ng-container>
 
 
   <ng-container matColumnDef="nom_prof">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let profesor"> {{profesor.nom_prof}} </td>
+    <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}"> 
+        <div *ngIf="tomarCI == profesor.ci_profesor && edit "  >
+            <form class="col s1" [formGroup]="profesoresE"  >
+          <input type="text" matInput class="browser-default"   formControlName="nombre_prof"   placeholder="{{profesor.nom_prof}} " >
+          
+      </form>
+      </div>
+      <div *ngIf="tomarCI != profesor.ci_profesor && edit">
+          <span  >{{profesor.nom_prof}} </span>
+
+      </div>
+      <div *ngIf="!edit" >
+          <span  >{{profesor.nom_prof}} </span>
+        </div>
+      <!--       {{profesor.nom_prof}} 
+ -->    </td>
   </ng-container>
 
   
   <ng-container matColumnDef="ape_prof">
     <th mat-header-cell *matHeaderCellDef> Apellido </th>
-    <td mat-cell *matCellDef="let profesor"> {{profesor.ape_prof}} </td>
+    <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
+        <div *ngIf="tomarCI == profesor.ci_profesor && edit "  >
+            <form class="col s1" [formGroup]="profesoresE" >
+          <input type="text" matInput class="browser-default"   class="validate" formControlName="apellido_prof"   placeholder="{{profesor.ape_prof}}" >
+           
+      </form>
+      </div>
+      <div *ngIf="tomarCI != profesor.ci_profesor && edit">
+          <span  >{{profesor.ape_prof}}</span>
+
+      </div>
+      <div *ngIf="!edit" >
+          <span  >{{profesor.ape_prof}}</span>
+        </div>
+<!--       {{profesor.ape_prof}}
+ -->     </td>
   </ng-container>
 
  
   <ng-container matColumnDef="correo_prof">
     <th mat-header-cell *matHeaderCellDef> Correo </th>
-    <td mat-cell *matCellDef="let profesor"> {{profesor.cor_prof}} </td>
+    <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
+        <div *ngIf="tomarCI == profesor.ci_profesor && edit "  >
+            <form class="col s1" [formGroup]="profesoresE"  >
+          <input type="text"  class="validate" matInput  formControlName="correo_prof"   placeholder="{{profesor.cor_prof}} " >
+          
+      </form>
+      </div>
+      <div *ngIf="tomarCI != profesor.ci_profesor && edit">
+          <span   >{{profesor.cor_prof}} </span>
+
+      </div>
+      <div *ngIf="!edit" >
+          <span   >{{profesor.cor_prof}} </span>
+        </div>
+<!--       {{profesor.cor_prof}} 
+ -->    </td>
   </ng-container>
 
   <ng-container matColumnDef="h_e">
-      <th mat-header-cell *matHeaderCellDef> Horas estipuladas </th>
-      <td mat-cell *matCellDef="let profesor"> {{profesor.horas_est}} </td>
+      <th mat-header-cell *matHeaderCellDef > Horas estipuladas </th>
+      <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}"> 
+          <div *ngIf="tomarCI == profesor.ci_profesor && edit "  >
+              <form class="col s1" [formGroup]="profesoresE" >
+            <input type="number" matInput  class="validate" formControlName="hora_T"   placeholder="{{profesor.horas_est}} " >
+            
+        </form>
+        </div>
+        <div *ngIf="tomarCI != profesor.ci_profesor && edit">
+            <span  >{{profesor.horas_est}} </span>
+  
+        </div>
+        <div *ngIf="!edit" >
+            <span  >{{profesor.horas_est}} </span>
+          </div>
+<!--           {{profesor.horas_est}} 
+ -->      </td>
     </ng-container>
 
-  
+    <ng-container matColumnDef="boton">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">  <button (click)="borrarProfesor(profesor.ci_profesor)" mat-icon-button >
+          <mat-icon>delete</mat-icon>
+        </button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="botonE"   >
+          <th mat-header-cell *matHeaderCellDef> Editar </th>
+          <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}"> 
+            
+            
+              <div *ngIf="edit && tomarCI == profesor.ci_profesor ">
+                  <form class="col s1 " [formGroup]="profesoresE"  (ngSubmit)="editarCI(profesor.ci_profesor) && editarNombre(profesor.ci_profesor) && editarApellido(profesor.ci_profesor) && editarCorreo(profesor.ci_profesor) && editarHorasT(profesor.ci_profesor)">
+                  <button  (click)="edit = false " mat-icon-button id="editado" >
+                      <mat-icon>pregnant_woman</mat-icon>
+                  </button> 
+                  <button [disabled]="!profesoresE.valid" type="submit" mat-icon-button id="editado" >
+                    <mat-icon>accessible_forward</mat-icon>
+                </button> 
+              </form>
+              </div>
+            
+        
+            <div *ngIf="!edit" > 
+                <button  (click)="edit=true"   (click)= "tomarCI = profesor.ci_profesor " (click)= "CI = profesor.ci_profesor "   (click)="nombre = profesor.nom_prof " (click)="apellido = profesor.ape_prof" (click)=  "correo=profesor.cor_prof" (click)=" horaT = profesor.horas_est"   mat-icon-button >
+                   <mat-icon>pregnant_woman</mat-icon>
+                </button>
+            </div>
+    
+           </td>
+      </ng-container>
 
 
 
