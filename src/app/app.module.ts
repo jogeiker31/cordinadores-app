@@ -16,6 +16,8 @@ import { MateriasService } from './services/materias.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     NgxElectronModule,
     HttpClientModule
+    
      
     
   ],

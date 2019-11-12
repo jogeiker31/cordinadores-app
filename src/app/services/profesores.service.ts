@@ -39,8 +39,84 @@ setProfesor(data){
   this.profesores.push(data);
 }
 
-ProfesorOcupado(id_mat,data){
+//Eliminar profesor
+async deleteProfesor(codigo){
+  let profesores2 = await this.profesores.filter((profesor)=>{
+   return  profesor.ci_profesor != codigo
+    
+    
+  })
 
+  this.profesores = profesores2
+}
+
+
+
+
+//CI
+async updateCi(codigo: string,value) {
+  let profesores2 = await this.profesores.filter((profesor)=>{
+    if(profesor.ci_profesor == codigo){
+      profesor.ci_profesor = value
+    }
+    
+     return  profesor
+     
+   })
+   this.profesores = profesores2
+   
+}
+//nombre
+async updateNombre(codigo: string ,value:string) {
+  let profesores2 = await this.profesores.filter((profesor)=>{
+    if(profesor.ci_profesor == codigo){
+      profesor.nom_prof = value//asegurate de que funcione
+    }
+    
+     return  profesor
+     
+   })
+   this.profesores = profesores2
+   
+}
+//apellido
+async updateApellido(codigo: string,value ) {
+  let profesores2 = await this.profesores.filter((profesor)=>{
+    if(profesor.ci_profesor == codigo){
+      profesor.ape_prof = value
+    }
+    
+     return  profesor
+     
+   })
+   this.profesores = profesores2
+   
+}
+//correo
+async updateCorreo(codigo: string,value ) {
+  let profesores2 = await this.profesores.filter((profesor)=>{
+    if(profesor.ci_profesor == codigo){
+      profesor.cor_prof = value
+    }
+    
+     return  profesor
+     
+   })
+   this.profesores = profesores2
+   
+}
+//horas trabajo
+async updateHorasT(codigo: string,value ) {
+  let profesores2 = await this.profesores.filter((profesor)=>{
+    if(profesor.ci_profesor == codigo){
+      profesor.horas_est = parseInt(value)
+    }
+    
+     return  profesor
+     
+   })
+   this.profesores = profesores2
+   
 }
 
 
