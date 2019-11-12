@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
+export interface User {
+  usuario: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   usuarios = [{
     ci_coor:'27040372',
@@ -14,7 +18,8 @@ export class UsuariosService {
     ape_coor:'Lizarraga',
     usuario:'user',
     contra:'user',
-    correo_coor:'jogeiker1999@gmail.com'
+    correo_coor:'jogeiker1999@gmail.com',
+    pregunta_seguridad_uno:''
   },
     {
       ci_coor:'27040373',
@@ -26,12 +31,57 @@ export class UsuariosService {
     }
 ]
 
+preguntas_seguridad = [
+  {
+    usuario:'user',
+    pregunta_uno:'Deportista favorito?',
+    respuesta_uno:'cristiano ronaldo',
+    pregunta_dos:'persona que mas odias?',
+    respuesta_dos:'yo mismo'
+  }
+]
 
 
 
 
 userConected;
 
+async UsuarioExiste(usuario){
+  let usuarioExist = await this.usuarios.filter((user)=>{
+    return user.usuario = usuario;
+  })
+
+  if (usuarioExist.length > 0){
+    return true
+  }else {return false}
+}
+
+usuarioExisteApi(usuario:string){
+  return this.http.post<User>('http://localhost:3000/usuario',{usuario:usuario});
+}
+
+async getPreguntas(user){
+  let preguntas = await this.preguntas_seguridad.filter((pregunta)=>{
+    return pregunta.usuario == user;
+  })
+  if(preguntas.length>0){
+    return preguntas[0]
+  }else{
+    return false
+  }
+  
+}
+
+async verficarPreguntas(respuestas){
+    let preguntas = await this.preguntas_seguridad.filter((user)=>{
+      return (user.usuario == respuestas.usuario ) && (user.respuesta_uno == respuestas.respuesta_uno) && (user.respuesta_dos == respuestas.respuesta_dos)
+    })
+    if (preguntas.length > 0){
+      return true
+    }else {
+      return false
+    }
+}
 
 getUsuarios(){
   return this.usuarios;
@@ -49,6 +99,14 @@ getUsuario(id){
 
 setUserConected(id){
   this.userConected = this.getUsuario(id)
+}
+
+async cambiarPassword(password){
+  await this.usuarios.map((usuario) =>{
+    if(usuario.usuario == password.usuario){
+      usuario.contra = password.new_password;
+    }
+  })
 }
 
 async authUsuario(usuario,contrasena){

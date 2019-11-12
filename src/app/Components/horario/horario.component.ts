@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AsignarMateriaComponent } from '../dialog/asignar-materia/asignar-materia.component';
 import { horario_data, saveHour } from 'src/assets/DB/horario';
-import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AsignarMateriaSeccionComponent } from '../dialog/asignar-materia-seccion/asignar-materia-seccion.component';
-import { async } from 'q';
 import { AsignarAulaComponent } from '../dialog/asignar-aula/asignar-aula.component';
 import { AsignarSemestreComponent } from '../dialog/asignar-semestre/asignar-semestre.component';
 import { ProfesoresService } from 'src/app/services/profesores.service';
 import { SeccionesService } from 'src/app/services/secciones.service';
+import { MateriasService } from 'src/app/services/materias.service';
 
 
 @Component({
@@ -19,6 +17,13 @@ import { SeccionesService } from 'src/app/services/secciones.service';
 })
 export class HorarioComponent implements OnInit {
 
+  constructor(
+    public dialog: MatDialog, 
+    public profesoresService:ProfesoresService, 
+    public seccionesService:SeccionesService,
+    public materiasService:MateriasService) {}
+
+
   info = this.seccionesService.seccionSelected[0]
 
   
@@ -26,7 +31,7 @@ export class HorarioComponent implements OnInit {
     
 
   getNameOfMateria(code){
-    const materia = materias.filter((mat)=>{
+    const materia = this.materiasService.materias.filter((mat)=>{
       return mat.codigo_materia == code;
     })
     if(materia[0]){
@@ -36,8 +41,8 @@ export class HorarioComponent implements OnInit {
 
 
    getNameOfMateriaById(id){
-    let materia_id = materiasPorSeccion.filter((mat_id)=>{
-      return mat_id.id_mat_sec == id
+    let materia_id = this.materiasService.materiasPorSeccion.filter((materia)=>{
+      return materia.id_mat_sec == id
     })
 
     if(materia_id[0]){
@@ -102,16 +107,14 @@ openDialogSemestreSec(seccion){
 
 
 
-  constructor(public dialog: MatDialog, public profesoresService:ProfesoresService, public seccionesService:SeccionesService) {}
-
+ 
   async ngOnInit() {
     
     this.MateriasData = []
 
-     this.MateriasData = await materiasPorSeccion.filter((materia)=>{ 
-      return materia.codigo_seccion === this.info.codigo_siceu
+     this.MateriasData = await this.materiasService.getMateriasSeccion(this.info.codigo_siceu);
 
-    })
+    
     
   
 

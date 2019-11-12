@@ -13,6 +13,7 @@ import { AsignarSemestreComponent } from 'src/app/Components/dialog/asignar-seme
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
 import { UsuarioIncorrectoComponent } from 'src/app/Components/dialog/usuario-incorrecto/usuario-incorrecto.component';
+import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
 
 
 export const components = [AppComponent,
@@ -29,7 +30,8 @@ export const components = [AppComponent,
     AsignarSemestreComponent,
     LoginComponent,
     LogoutComponent,
-    UsuarioIncorrectoComponent
+    UsuarioIncorrectoComponent,
+    RecoveryPasswordComponent
     
     ]
 

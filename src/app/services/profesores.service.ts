@@ -39,7 +39,9 @@ setProfesor(data){
   this.profesores.push(data);
 }
 
+ProfesorOcupado(id_mat,data){
 
+}
 
 
 }

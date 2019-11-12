@@ -7,6 +7,7 @@ import { ReloadComponent } from 'src/app/Components/reload/reload.component';
 import { SeccionesComponent } from 'src/app/Components/secciones/secciones.component';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
+import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
 
  const appRoutes: Routes = [
     { path: 'horario', component: HorarioComponent },
@@ -17,6 +18,7 @@ import { LogoutComponent } from 'src/app/Components/logout/logout.component';
     {path: 'secciones', component: SeccionesComponent},
     {path: '', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
+    {path: 'forgotpassword', component:RecoveryPasswordComponent}
   ];
 
 

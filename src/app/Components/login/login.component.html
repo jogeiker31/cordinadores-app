@@ -22,7 +22,8 @@
                       <input type="password" matInput  class="browser-default" formControlName="contra" (keyup.enter)="iniciarSesion()">
                       <mat-placeholder class="placeholder">Contraseña</mat-placeholder>
                     </mat-form-field>
-                
+                    <a routerLink="/forgotpassword">Olvido la contraseña?</a>
+                    
             </form>
           </div>
           </mat-card-content>
@@ -30,6 +31,7 @@
             <button mat-button class="col s6  btn-is " [disabled]="!loginForm.valid" (click)="iniciarSesion()">Iniciar sesión</button>
            
           </mat-card-actions>
+          
         </mat-card>
   </div>
 

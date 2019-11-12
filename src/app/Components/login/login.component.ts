@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
   
 
+
   async iniciarSesion(){
     let info = this.loginForm.value; // guardamos el valor del formulario en la variable info
     let user = await this.usuariosService.authUsuario(info.usuario,info.contra) // le pedimos al servicio usuariosService que verifique si el usuario que desea ingresar al sistema existe, si no existe devuelve null

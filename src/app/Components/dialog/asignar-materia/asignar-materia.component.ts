@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { horario_data } from 'src/assets/DB/horario';
-import { materiasPorSeccion, materias } from 'src/assets/DB/materias';
 import { ProfesoresService } from 'src/app/services/profesores.service';
+import { MateriasService } from 'src/app/services/materias.service';
 
 export interface DialogData {
   hora: object,
@@ -21,9 +21,8 @@ export class AsignarMateriaComponent implements OnInit {
 
  async ngOnInit() {
   this.materiasPS = []
-  this.materiasPS = await materiasPorSeccion.filter( async (materia)=>{
-    return materia.codigo_seccion == this.data.seccion
-  })
+  this.materiasPS = await this.materiasServices.getMateriasSeccion(this.data.seccion)
+
   }
  
   materiasPS;
@@ -33,7 +32,8 @@ export class AsignarMateriaComponent implements OnInit {
   constructor(
     public asignarMateriaDialog: MatDialogRef<AsignarMateriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public profesoresServices: ProfesoresService
+    public profesoresServices: ProfesoresService,
+    public materiasServices: MateriasService
     ) {}
 
   onNoClick(): void {
@@ -98,7 +98,7 @@ export class AsignarMateriaComponent implements OnInit {
       // esta funcion trae todas las materias que da el profesor X que se le asigno la materia que se desea guardar 
       let materias = []
      
-      materias =  await materiasPorSeccion.filter((mat)=>{ // de las materias ya guardadas para cada seccion, me traera todas las que da el profesor ya mencionado y las gurdara en un arreglo
+      materias =  await this.materiasServices.materiasPorSeccion.filter((mat)=>{ // de las materias ya guardadas para cada seccion, me traera todas las que da el profesor ya mencionado y las gurdara en un arreglo
         return mat.ci_profesor == ci 
       })
       
@@ -182,7 +182,7 @@ export class AsignarMateriaComponent implements OnInit {
 
 
   getNameOfMateria(code){
-    const materia = materias.filter((mat)=>{
+    const materia = this.materiasServices.materias.filter((mat)=>{
       return mat.codigo_materia == code;
     })
     if(materia[0]){
@@ -191,7 +191,7 @@ export class AsignarMateriaComponent implements OnInit {
   }
 
   getNameOfMateriaById(id){
-    let materia_id = materiasPorSeccion.filter((mat_id)=>{
+    let materia_id = this.materiasServices.materiasPorSeccion.filter((mat_id)=>{
       return mat_id.id_mat_sec == id
     })
 

@@ -5,7 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { materias } from 'src/assets/DB/materias';
+import { MateriasService } from 'src/app/services/materias.service';
 declare const M;
 
 
@@ -20,7 +20,7 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private fb: FormBuilder, private router:Router) { }
+  constructor(private fb: FormBuilder, private router:Router, public materiasService:MateriasService) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -42,7 +42,7 @@ export class MateriasComponent implements OnInit {
 
 
   displayedColumns: string[] = ['codigo', 'materia','semestre', 'horas_teo', 'horas_pra','horas_lab', 'horas_tot'];
-  dataSource = new MatTableDataSource(materias);
+  dataSource = new MatTableDataSource(this.materiasService.getMaterias());
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -72,7 +72,8 @@ export class MateriasComponent implements OnInit {
 
 
   guardarMateria(){
-    materias.push(this.materiasForm.value)
+    this.materiasService.setMateria(this.materiasForm.value)
+    
     
     this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
     {
