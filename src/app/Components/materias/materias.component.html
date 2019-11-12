@@ -277,10 +277,10 @@
           <div *ngIf="edit && tomarcodigo == materia.codigo_materia ">
               <form class="col s1 " [formGroup]="materiasE"  (ngSubmit)="editarCodigo(materia.codigo_materia) && editarHorasL(materia.codigo_materia) && editarHorasP(materia.codigo_materia) && editarHorasT(materia.codigo_materia) && editarSemestre(materia.codigo_materia) && editarMateria(materia.codigo_materia)">
               <button  (click)="edit = false " mat-icon-button id="editado" >
-                  <mat-icon>pregnant_woman</mat-icon>
+                  <mat-icon>build</mat-icon>
               </button> 
               <button [disabled]="!materiasE.valid" type="submit" mat-icon-button id="editado" >
-                <mat-icon>accessible_forward</mat-icon>
+                <mat-icon>done</mat-icon>
             </button> 
           </form>
           </div>
@@ -288,7 +288,7 @@
     
         <div *ngIf="!edit" > 
             <button  (click)="edit=true"   (click)= "tomarcodigo = materia.codigo_materia " (click)= "codigo = materia.codigo_materia "   (click)="nombre = materia.nombre_mat " (click)="semestre = materia.semestre_mat" (click)=" horaT = materia.horas_teo" (click)=  "horaP=materia.horas_pra" (click)= "horaL = materia.horas_lab  " mat-icon-button >
-               <mat-icon>pregnant_woman</mat-icon>
+               <mat-icon>build</mat-icon>
             </button>
         </div>
 
