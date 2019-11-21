@@ -11,22 +11,22 @@ import { Router } from '@angular/router';
  * Food data with nested structure.
  * Each node has a name and an optiona list of children.
  */
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
+export interface Secciones {
+  semestre: string;
+  children?: Secciones[];
 }
 
-const TREE_DATA: FoodNode[] = [
+const secciones: Secciones[] = [
   {
-    name: 'Primer semestre',
+    semestre: 'Primer semestre',
     children: [
-      {name: '01S-2614-D1'}
+      {semestre: '01S-2614-D1'}
     ]
   }, {
-    name: 'Sexto semestre',
+    semestre: 'Sexto semestre',
     children: [
       {
-        name: '06S-2614-D1'
+        semestre: '06S-2614-D1'
       },
     ]
   },
@@ -50,10 +50,10 @@ interface ExampleFlatNode {
 export class SeccionesComponent {
 
 
-  private _transformer = (node: FoodNode, level: number) => {  // codigo materials para expandir el arbol
+  private _transformer = (node:Secciones, level: number) => {  // codigo materials para expandir el arbol
     return {
       expandable: !!node.children && node.children.length > 0,
-      name: node.name,
+      name: node.semestre,
       level: level,
     };
   }
@@ -67,7 +67,7 @@ export class SeccionesComponent {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener); // codigo materials :V 
 
   constructor( public seccionesService:SeccionesService, private router:Router) {
-    this.dataSource.data = TREE_DATA; // esta es la data como tal 
+    this.dataSource.data = secciones; // esta es la data como tal 
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;

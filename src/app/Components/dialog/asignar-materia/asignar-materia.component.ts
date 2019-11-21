@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { horario_data } from 'src/assets/DB/horario';
 import { ProfesoresService } from 'src/app/services/profesores.service';
 import { MateriasService } from 'src/app/services/materias.service';
+import { HorarioService } from 'src/app/services/horario.service';
 
 export interface DialogData {
   hora: object,
@@ -33,7 +33,8 @@ export class AsignarMateriaComponent implements OnInit {
     public asignarMateriaDialog: MatDialogRef<AsignarMateriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public profesoresServices: ProfesoresService,
-    public materiasServices: MateriasService
+    public materiasServices: MateriasService,
+    public horarioServices: HorarioService
     ) {}
 
   onNoClick(): void {
@@ -41,8 +42,9 @@ export class AsignarMateriaComponent implements OnInit {
   }
 
   async SaveMateria(data){
-    if(await this.profesorNoOcupado(this.materiaSelected,data)){ // evalua si el profesor elegido no esta ocupado en esa hora 
-      // si no esta ocupado, se procede a guardar
+    if((await this.profesorNoOcupado(this.materiaSelected,data)) && (await this.profesorHorasDisponibles(await this.getCiProfesor(this.materiaSelected)))){ // evalua si el profesor elegido no esta ocupado en esa hora 
+      // si no esta ocupado y tiene horas disponibles, se procede a guardar
+      await this.profesoresServices.sumarHoraProfesor(await this.getCiProfesor(this.materiaSelected))
       switch (data.dia) {
             case 'L':
               data.hora.lunes = this.materiaSelected;
@@ -72,22 +74,43 @@ export class AsignarMateriaComponent implements OnInit {
     
   }
 
-  async profesorNoOcupado(id,data){
-    // para verificar si el profesor esta ocupado se realizan una serie de pasos
+  async getCiProfesor(id_mat){ // retorna la CI del profesor de X materia 
     let materia = []
     materia = await this.materiasPS.filter((mat)=>{ // primero hay que saber la materia que se quiere guardar, ya que en esta se encuentra la cedula del profesor 
-      return mat.id_mat_sec == id
+      return mat.id_mat_sec == id_mat
     })
 
-    let ciProfesor = materia[0].ci_profesor; // tenemos la cedula del profesor
+    let ciProfesor =await  materia[0].ci_profesor; // tenemos la cedula del profesor
 
-    let materiasProfesor = await this.Materias_Profesor(ciProfesor) // preguntamos a esta funcion cuales son todas las materias que da este profesor
+    return ciProfesor
+  }
+
+
+
+
+  async profesorHorasDisponibles(ci){
+    if(await this.profesoresServices.profesorHorasDisponible(ci)){
+      return true
+    }else{
+      let profesor = await this.profesoresServices.getProfesor(ci)
+      this.asignarMateriaDialog.close({nombre: profesor[0].nom_prof,apellido: profesor[0].ape_prof,err:'horasExcedidas'})
+      return false
+    }
+  }
+
+
+
+
+  async profesorNoOcupado(id,data){
+    // para verificar si el profesor esta ocupado se realizan una serie de pasos
+    
+
+    let materiasProfesor = await this.Materias_Profesor(this.getCiProfesor(id)) // preguntamos a esta funcion cuales son todas las materias que da este profesor
     
     if(await this.MateriaGuardada(materiasProfesor,data)){ // si una de esas materias que da X profesor , ya estan en la hora seleccionada no se podra guardar a la materia seleccionada
-      let profesorInfo = this.profesoresServices.getProfesor(ciProfesor)
+      let profesorInfo = this.profesoresServices.getProfesor(this.getCiProfesor(id))
       
-      this.asignarMateriaDialog.close({nombre: profesorInfo[0].nom_prof,apellido: profesorInfo[0].ape_prof});
-      
+      this.asignarMateriaDialog.close({nombre: profesorInfo[0].nom_prof,apellido: profesorInfo[0].ape_prof,err:'profesorOcupado'});
         return false
     }else{
        return true // si no esta dando materias a esa hora, se procedera a avisarle a la funcion SaveMateria() que si la puede guardar
@@ -96,6 +119,8 @@ export class AsignarMateriaComponent implements OnInit {
     
    
     }
+
+
 
     async Materias_Profesor(ci){
       // esta funcion trae todas las materias que da el profesor X que se le asigno la materia que se desea guardar 
@@ -116,6 +141,8 @@ export class AsignarMateriaComponent implements OnInit {
     }
 
     
+
+
     async MateriaGuardada(ids,data){
       // esta funcion evalua si ya una de esas materias que da X profesor, esta guardada en la hora seleccionada para guardar la materia deseada
       let state = [];
@@ -172,7 +199,7 @@ export class AsignarMateriaComponent implements OnInit {
     }
 
     async getHoras(hora){
-      let horas = await horario_data.filter((hor)=>{ // me trae todas las horas X de todos los horarios en la BD
+      let horas = await this.horarioServices.horario_data.filter((hor)=>{ // me trae todas las horas X de todos los horarios en la BD
         return hor.hora == hora;
       })
       return horas // los devuelve como arreglo

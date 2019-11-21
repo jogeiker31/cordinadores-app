@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Secciones } from '../Components/secciones/secciones.component';
 
 export interface Seccion{
   codigo_siceu:string,//r
@@ -6,7 +7,7 @@ export interface Seccion{
   num_semestre:number,
   carrera:string,
   turno:string,
-  Aula:number,
+  aula:number,
 
 }
 
@@ -25,7 +26,7 @@ secciones: Seccion[] = [{
   num_semestre:1,
   carrera:'ING DE SISTEMAS',
   turno:'DIURNO',
-  Aula:null
+  aula:null
 },
 {
   codigo_siceu:'06S-2614-D1',
@@ -33,12 +34,21 @@ secciones: Seccion[] = [{
   num_semestre:6,
   carrera:'ING DE SISTEMAS',
   turno:'DIURNO',
-  Aula:null
+  aula:null
 }
 
 ]
 
-seccionSelected;
+
+seccionesTree:Secciones[];
+getSeccionesTree(){
+  
+  this.secciones.forEach((seccion)=>{
+
+  })
+}
+
+seccionSelected = null;
 
 
 
@@ -51,9 +61,11 @@ setSeccion(seccion){
 }
 
 async getSeccion(codigo){
-  this.seccionSelected =  await this.secciones.filter((seccion)=>{
+  let seccion =  await this.secciones.filter((seccion)=>{
     return seccion.codigo_siceu == codigo
   })
+  if(seccion.length >0){this.seccionSelected = seccion[0];}
 }
+  
 
 }

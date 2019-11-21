@@ -9,13 +9,13 @@ import { ReloadComponent } from 'src/app/Components/reload/reload.component';
 import { SeccionesComponent } from 'src/app/Components/secciones/secciones.component';
 import { AsignarMateriaSeccionComponent } from 'src/app/Components/dialog/asignar-materia-seccion/asignar-materia-seccion.component';
 import { AsignarAulaComponent } from 'src/app/Components/dialog/asignar-aula/asignar-aula.component';
-import { AsignarSemestreComponent } from 'src/app/Components/dialog/asignar-semestre/asignar-semestre.component';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
 import { UsuarioIncorrectoComponent } from 'src/app/Components/dialog/usuario-incorrecto/usuario-incorrecto.component';
 import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
 import { ProfesorOcupadoComponent } from 'src/app/Components/dialog/profesor-ocupado/profesor-ocupado.component';
 import { BorrarComponent } from 'src/app/Components/dialog/borrar/borrar.component';
+import { HorasExcedidasComponent } from 'src/app/Components/dialog/horas-excedidas/horas-excedidas.component';
 
 
 export const components = [AppComponent,
@@ -29,14 +29,14 @@ export const components = [AppComponent,
     SeccionesComponent,
     AsignarMateriaSeccionComponent,
     AsignarAulaComponent,
-    AsignarSemestreComponent,
     LoginComponent,
     LogoutComponent,
     UsuarioIncorrectoComponent,
     RecoveryPasswordComponent,
     ProfesorOcupadoComponent,
-    BorrarComponent
+    BorrarComponent,
+    HorasExcedidasComponent
     
     ]
 
-export const dialogs = [BorrarComponent,ProfesorOcupadoComponent,AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent,UsuarioIncorrectoComponent]
+export const dialogs = [HorasExcedidasComponent,BorrarComponent,ProfesorOcupadoComponent,AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,UsuarioIncorrectoComponent]

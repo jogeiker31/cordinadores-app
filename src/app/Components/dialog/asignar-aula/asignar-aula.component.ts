@@ -33,7 +33,7 @@ export class AsignarAulaComponent implements OnInit {
   
 
   asignarAula(seccion){
-    seccion.Aula = this.AulaSelected;
+    seccion.aula = this.AulaSelected;
     this.onNoClick()
   }
 

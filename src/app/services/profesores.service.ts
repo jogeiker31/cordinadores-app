@@ -7,7 +7,8 @@ export interface Profesor {
   nom_prof: string,
   ape_prof: string,
   cor_prof:string,
-  horas_est:number
+  horas_est:number,
+  horas_ocupadas:number
 }
 
 @Injectable({
@@ -22,7 +23,8 @@ profesores: Profesor[] = [{
   nom_prof:'jogeiker',
   ape_prof:'lizarraga',
   cor_prof:'jogeiker1999@gmail.com',
-  horas_est:30
+  horas_est:30,
+  horas_ocupadas:0 
 }];
 
 getProfesores(){
@@ -36,7 +38,41 @@ getProfesor(id){
 }
 
 setProfesor(data){
+  data.horas_ocupadas = 0;
   this.profesores.push(data);
+}
+
+ async sumarHoraProfesor(ci){
+   await this.profesores.forEach((profesor)=>{
+    if(profesor.ci_profesor === ci){
+      profesor.horas_ocupadas = profesor.horas_ocupadas + 1;
+      
+    }
+  })
+  
+}
+
+restarHoraProfesor(ci){
+   this.profesores.forEach((profesor)=>{
+    if(profesor.ci_profesor === ci){
+      profesor.horas_ocupadas = profesor.horas_ocupadas - 1;
+    }
+  })
+}
+
+
+async profesorHorasDisponible(ci){
+  let profesor = await this.profesores.filter((profesor)=>{
+    return profesor.ci_profesor == ci
+  }) 
+
+  if(profesor[0].horas_ocupadas >= profesor[0].horas_est){
+    return false
+  }else{
+    return true
+  }
+
+
 }
 
 //Eliminar profesor

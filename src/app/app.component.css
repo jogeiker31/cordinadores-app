@@ -79,10 +79,23 @@
     top: 0;
 
 }
+.nombre-coor{
+    font-size: 15px;
+    margin-left: 2%;
+}
 
 .coordinador {
     right: 0;
     bottom: 1px;
     color: white;
     font-size: 13px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.hora{
+    font-size: 16px;
+    margin-top: 3%;
 }

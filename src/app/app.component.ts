@@ -12,6 +12,7 @@ import { UsuariosService } from './services/usuarios.service';
 })
 export class AppComponent {
    
+  hora;
   mobileQuery: MediaQueryList; // codigo Materials
 
   opened: boolean = true; // codigo Materials
@@ -48,7 +49,9 @@ export class AppComponent {
   }
 
 async ngOnInit(){
- 
+  this.getHora()
+
+  
   if(localStorage.length>0){
     await this.loginService.getUserLog()
   }
@@ -81,9 +84,22 @@ Cerrar(){
 }
 
 
+zeroFill( number, width )
+{
+  width -= number.toString().length;
+  if ( width > 0 )
+  {
+    return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+  }
+  return number + ""; // siempre devuelve tipo cadena
+}
 
-
-
+ getHora(){
+   setInterval(()=>{
+    let fecha = new Date;
+    this.hora = ` ${(fecha.getHours()>12)? (this.zeroFill(fecha.getHours()-12,2)) : this.zeroFill(fecha.getHours(),2) }:${this.zeroFill(fecha.getMinutes(),2)}:${this.zeroFill(fecha.getSeconds(),2)} ${(this.zeroFill(fecha.getHours()>12,2))? 'PM' : 'AM'}`
+   },1000)
+ }
 
   ngOnDestroy(): void { // codigo Materials
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -92,4 +108,6 @@ Cerrar(){
   ngAfterContentChecked(): void {
     this.changeDetectorRef.detectChanges();
   }
+
+
 }

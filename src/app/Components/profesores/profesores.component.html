@@ -223,7 +223,7 @@
               <div *ngIf="edit && tomarCI == profesor.ci_profesor ">
                   <form class="col s1 " [formGroup]="profesoresE"  (ngSubmit)="editarCI(profesor.ci_profesor) && editarNombre(profesor.ci_profesor) && editarApellido(profesor.ci_profesor) && editarCorreo(profesor.ci_profesor) && editarHorasT(profesor.ci_profesor)">
                   <button  (click)="edit = false " mat-icon-button id="editado" >
-                      <mat-icon>build</mat-icon>
+                      <mat-icon>clear</mat-icon>
                   </button> 
                   <button [disabled]="!profesoresE.valid" type="submit" mat-icon-button id="editado" >
                     <mat-icon>done</mat-icon>
@@ -234,7 +234,7 @@
         
             <div *ngIf="!edit" > 
                 <button  (click)="edit=true"   (click)= "tomarCI = profesor.ci_profesor " (click)= "CI = profesor.ci_profesor "   (click)="nombre = profesor.nom_prof " (click)="apellido = profesor.ape_prof" (click)=  "correo=profesor.cor_prof" (click)=" horaT = profesor.horas_est"   mat-icon-button >
-                   <mat-icon>build</mat-icon>
+                   <mat-icon>edit</mat-icon>
                 </button>
             </div>
     

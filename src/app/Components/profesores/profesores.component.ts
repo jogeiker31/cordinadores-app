@@ -81,7 +81,7 @@ export class ProfesoresComponent implements OnInit {
   
     const borrarDialog = this.dialog.open(BorrarComponent,{
       width: '300px',
-      height:'190px'
+      height:'135px'
     })
 
     await borrarDialog.afterClosed().subscribe((result)=>{
