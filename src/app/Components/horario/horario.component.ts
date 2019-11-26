@@ -28,7 +28,7 @@ export class HorarioComponent implements OnInit {
     public horarioService:HorarioService) {}
 
 
-  info;
+  info = null;
 
   
 
@@ -73,8 +73,8 @@ export class HorarioComponent implements OnInit {
     
     
     asignarMateriaDialog.afterClosed().subscribe((result) => {
-      
-      if(result.err == 'profesorOcupado'){
+      if(result){
+        if(result.err == 'profesorOcupado'){
         const profesorOcupadoDialog = this.dialog.open(ProfesorOcupadoComponent,{
           width: '450px',
           height: '200px',
@@ -89,6 +89,8 @@ export class HorarioComponent implements OnInit {
         })
       
       }
+      }
+      
 
 
     })
@@ -134,12 +136,11 @@ export class HorarioComponent implements OnInit {
     this.info = await  this.seccionesService.seccionSelected
 
 
-    if(this.info == null){
+    if( this.info == null){
       this.router.navigateByUrl('/secciones')
-    }
+    }else {
 
-
-    this.MateriasData = []
+      this.MateriasData = []
 
      this.MateriasData = await this.materiasService.getMateriasSeccion(this.info.codigo_siceu);
 
@@ -158,6 +159,11 @@ export class HorarioComponent implements OnInit {
         return data.seccion == this.info.codigo_siceu
       })
     }
+
+    }
+
+
+    
 
     
     

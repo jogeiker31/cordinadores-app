@@ -105,10 +105,10 @@ export class AsignarMateriaComponent implements OnInit {
     // para verificar si el profesor esta ocupado se realizan una serie de pasos
     
 
-    let materiasProfesor = await this.Materias_Profesor(this.getCiProfesor(id)) // preguntamos a esta funcion cuales son todas las materias que da este profesor
+    let materiasProfesor = await this.Materias_Profesor(await this.getCiProfesor(id)) // preguntamos a esta funcion cuales son todas las materias que da este profesor
     
     if(await this.MateriaGuardada(materiasProfesor,data)){ // si una de esas materias que da X profesor , ya estan en la hora seleccionada no se podra guardar a la materia seleccionada
-      let profesorInfo = this.profesoresServices.getProfesor(this.getCiProfesor(id))
+      let profesorInfo = this.profesoresServices.getProfesor(await this.getCiProfesor(id))
       
       this.asignarMateriaDialog.close({nombre: profesorInfo[0].nom_prof,apellido: profesorInfo[0].ape_prof,err:'profesorOcupado'});
         return false
@@ -149,7 +149,7 @@ export class AsignarMateriaComponent implements OnInit {
       let horas = []
       horas = await this.getHoras(data.hora.hora) // esperamos la respuesta de la funcion getHoras() que nos traera todas las horas X de todas las secciones guardadas
       
-     
+    
 
       switch (data.dia) { // este switche se encarga de buscar la informacion que necesitamos, dependiendo del dia donde se desea guardar la materia
         // no hace falta explicar, se sobreentiende con las variables
@@ -192,7 +192,7 @@ export class AsignarMateriaComponent implements OnInit {
 
       if(state.length > 0){ // si state tiene informacion, quiere decir que ya hay una materia guardada en esa hora, por lo cual la funcion MateriaGuardada avisara que si existe una materia 
         return true
-      }else{
+      }else{  
         return false // de lo contrario avisara que no hay materia guardada
       }
 

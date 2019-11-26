@@ -27,6 +27,13 @@ secciones: Seccion[] = [{
   carrera:'ING DE SISTEMAS',
   turno:'DIURNO',
   aula:null
+},{
+codigo_siceu:'02S-2614-D1',
+  semestre:'Segundo',
+  num_semestre:2,
+  carrera:'ING DE SISTEMAS',
+  turno:'DIURNO',
+  aula:null
 },
 {
   codigo_siceu:'06S-2614-D1',
@@ -40,7 +47,12 @@ secciones: Seccion[] = [{
 ]
 
 
+
+
+
+
 seccionesTree:Secciones[];
+
 getSeccionesTree(){
   
   this.secciones.forEach((seccion)=>{
@@ -51,6 +63,10 @@ getSeccionesTree(){
 seccionSelected = null;
 
 
+createSeccion(information,seccion){
+  
+  
+}
 
 getSecciones(){
   return this.secciones
