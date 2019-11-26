@@ -17,6 +17,7 @@ export class SidenavContentComponent implements OnInit {
     {url:'/profesores',nombre:'Profesores'},
     {url: '/materias',nombre:'materias'},
     {url: '/secciones',nombre:'Secciones'},
+    {url:'/aula',nombre:'Aulas'},
     {url: '/logout',nombre:'Cerrar sesión'}
     
   ]

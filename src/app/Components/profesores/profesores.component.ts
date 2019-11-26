@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfesoresService } from 'src/app/services/profesores.service';
+import { BorrarComponent } from '../dialog/borrar/borrar.component';
 
 
 
@@ -27,7 +28,8 @@ export class ProfesoresComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private router:Router, 
-    public profesoresService:ProfesoresService
+    public profesoresService:ProfesoresService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -77,13 +79,25 @@ export class ProfesoresComponent implements OnInit {
 
   async borrarProfesor(code){
   
-    await this.profesoresService.deleteProfesor(code)
-  
-    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    const borrarDialog = this.dialog.open(BorrarComponent,{
+      width: '300px',
+      height:'190px'
+    })
+
+    await borrarDialog.afterClosed().subscribe((result)=>{
+      if(result){
+        this.profesoresService.deleteProfesor(code)
+        this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
     {
       this.router.navigate(['/profesores'])
       
     }); 
+      }
+    })
+    
+    
+  
+    
   }
 
   edit:false;//para los botones de editar, si es false no es editable

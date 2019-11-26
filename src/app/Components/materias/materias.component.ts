@@ -1,13 +1,14 @@
 
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, throwToolbarMixedModesError } from '@angular/material';
+import { MatTableDataSource, throwToolbarMixedModesError, MatDialog } from '@angular/material';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MateriasService } from 'src/app/services/materias.service'
+import { BorrarComponent } from '../dialog/borrar/borrar.component';
 declare const M;
 
 
@@ -22,7 +23,11 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private fb: FormBuilder, private router:Router,public materiasService:MateriasService) { }
+  constructor(private fb: FormBuilder, 
+    private router:Router,
+    public materiasService:MateriasService,
+    public dialog: MatDialog
+    ) { }
 
 
 
@@ -100,13 +105,24 @@ export class MateriasComponent implements OnInit {
 
   async borrarMateria(code){
   
-  await this.materiasService.deleteMateria(code)
+    const borrarDialog = this.dialog.open(BorrarComponent,{
+      width: '300px',
+      height: '150px'
+    })
 
-  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
-  {
-    this.router.navigate(['/materias'])
-    
-  }); 
+    await borrarDialog.afterClosed().subscribe((result)=>{
+      if(result){
+         this.materiasService.deleteMateria(code)
+
+        this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+        {
+          this.router.navigate(['/materias'])
+          
+        }); 
+      }
+    })
+
+ 
 }
 
 edit:false;//para los botones de editar, si es false no es editable

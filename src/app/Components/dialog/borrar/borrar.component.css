@@ -1,0 +1,23 @@
+.btn-accept:focus{
+    background-color: #40bd66;
+    
+}
+
+.btn-cancel:focus{
+    background-color: rgb(211, 60, 60);
+}
+
+.btn-accept:focus{
+    background-color: none;
+    
+}
+
+.btn-cancel:focus{
+    background-color: rgba(196, 111, 111, 0.89);
+}
+
+
+.title-borrar{
+    height: 30px;
+}
+

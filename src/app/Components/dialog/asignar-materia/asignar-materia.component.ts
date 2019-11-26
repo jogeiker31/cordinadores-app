@@ -66,9 +66,10 @@ export class AsignarMateriaComponent implements OnInit {
             default:
               break;
           }
+          this.asignarMateriaDialog.close('si se guardo')
     }
     
-    this.asignarMateriaDialog.close()
+    
   }
 
   async profesorNoOcupado(id,data){
@@ -84,7 +85,9 @@ export class AsignarMateriaComponent implements OnInit {
     
     if(await this.MateriaGuardada(materiasProfesor,data)){ // si una de esas materias que da X profesor , ya estan en la hora seleccionada no se podra guardar a la materia seleccionada
       let profesorInfo = this.profesoresServices.getProfesor(ciProfesor)
-      alert(`El profesor ${profesorInfo[0].nom_prof} ${profesorInfo[0].ape_prof} se encuentra ocupado en esta hora`)  // como lo indica, ya esta ocupado a esa hora
+      
+      this.asignarMateriaDialog.close({nombre: profesorInfo[0].nom_prof,apellido: profesorInfo[0].ape_prof});
+      
         return false
     }else{
        return true // si no esta dando materias a esa hora, se procedera a avisarle a la funcion SaveMateria() que si la puede guardar
@@ -201,4 +204,6 @@ export class AsignarMateriaComponent implements OnInit {
     }
    }
 
+
+ 
 }

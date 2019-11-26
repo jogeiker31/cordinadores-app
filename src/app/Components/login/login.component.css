@@ -8,6 +8,10 @@
     height: 100%;
     
 }
+.logo{
+    height: 2cm;
+    width: 2cm;
+}
 
 mat-card-content{
     font-size: 16px;

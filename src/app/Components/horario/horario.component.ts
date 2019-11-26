@@ -8,7 +8,8 @@ import { AsignarSemestreComponent } from '../dialog/asignar-semestre/asignar-sem
 import { ProfesoresService } from 'src/app/services/profesores.service';
 import { SeccionesService } from 'src/app/services/secciones.service';
 import { MateriasService } from 'src/app/services/materias.service';
-
+import { ProfesorOcupadoComponent } from '../dialog/profesor-ocupado/profesor-ocupado.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'horario',
@@ -21,7 +22,8 @@ export class HorarioComponent implements OnInit {
     public dialog: MatDialog, 
     public profesoresService:ProfesoresService, 
     public seccionesService:SeccionesService,
-    public materiasService:MateriasService) {}
+    public materiasService:MateriasService,
+    public route:Router) {}
 
 
   info = this.seccionesService.seccionSelected[0]
@@ -62,6 +64,17 @@ export class HorarioComponent implements OnInit {
       height: '350px',
       data: {hora,dia,materia,seccion}
     });
+    
+    
+    asignarMateriaDialog.afterClosed().subscribe((result) => {
+      if(result.nombre && result.apellido){
+        const profesorOcupadoDialog = this.dialog.open(ProfesorOcupadoComponent,{
+          width: '450px',
+          height: '200px',
+          data: result
+        })
+      }
+    })
 
   
   
@@ -109,6 +122,10 @@ openDialogSemestreSec(seccion){
 
  
   async ngOnInit() {
+
+    if(this.info.lenght < 1){
+      this.route.navigateByUrl('secciones')
+    }
     
     this.MateriasData = []
 

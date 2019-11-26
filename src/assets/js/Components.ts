@@ -14,7 +14,9 @@ import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
 import { UsuarioIncorrectoComponent } from 'src/app/Components/dialog/usuario-incorrecto/usuario-incorrecto.component';
 import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
-
+import { ProfesorOcupadoComponent } from 'src/app/Components/dialog/profesor-ocupado/profesor-ocupado.component';
+import { BorrarComponent } from 'src/app/Components/dialog/borrar/borrar.component';
+import { AulaComponent } from 'src/app/Components/aula/aula.component'
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -31,8 +33,11 @@ export const components = [AppComponent,
     LoginComponent,
     LogoutComponent,
     UsuarioIncorrectoComponent,
-    RecoveryPasswordComponent
+    RecoveryPasswordComponent,
+    ProfesorOcupadoComponent,
+    BorrarComponent,
+    AulaComponent,
     
     ]
 
-export const dialogs = [AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent,UsuarioIncorrectoComponent]
+export const dialogs = [BorrarComponent,ProfesorOcupadoComponent,AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,AsignarSemestreComponent,UsuarioIncorrectoComponent]
