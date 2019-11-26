@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 
+export interface Semestre {
+  id_semestre: string,
+  num_semestre: number,
+  semestre:string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class SemestresService {
 
 
-  semestres = [{
+  semestres: Semestre[] = [{
     id_semestre:'01S',
     num_semestre: 1,
     semestre:'PRIMERO'
@@ -40,8 +46,6 @@ getSemestre(id){
   })
   if(result){
     return result[0];
-  }else{
-    return false
   }
   
 }

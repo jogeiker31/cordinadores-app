@@ -14,6 +14,15 @@ export class CarrerasService {
     nombre_carrera: 'Ingenieria de Telecomunicaciones'
   }]
 
+
+  async getCarrera(codigo){
+    return this.carreras.find((carrera)=>{
+      return carrera.codigo_carrera == codigo
+    })
+
+    
+  }
+
 constructor() { }
 
 }

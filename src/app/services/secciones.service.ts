@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Secciones } from '../Components/secciones/secciones.component';
+import { SemestresService } from './semestres.service';
+import { CarrerasService } from './carreras.service';
+import { TurnoService } from './turno.service';
 
 export interface Seccion{
   codigo_siceu:string,//r
@@ -18,7 +21,7 @@ export interface Seccion{
 
 export class SeccionesService {
 
-constructor() { }
+constructor(public semestresService:SemestresService, public carrerasService:CarrerasService,public turnosService:TurnoService) { }
 
 secciones: Seccion[] = [{
   codigo_siceu:'01S-2614-D1',
@@ -61,10 +64,23 @@ getSeccionesTree(){
 }
 
 seccionSelected = null;
+treeSeccionsExpande;
 
-
-createSeccion(information,seccion){
+async createSeccion(information){
+  let info_semestre = await this.semestresService.getSemestre(information.semestre);
+  let carrera_info = await this.carrerasService.getCarrera(information.carrera);
+  let turno_info =  await this.turnosService.getTurno(information.turno)
   
+  let new_seccion = {
+    codigo_siceu: information.seccion,
+    semestre: info_semestre.semestre,
+    num_semestre:info_semestre.num_semestre,
+    carrera: carrera_info.nombre_carrera,
+    turno: turno_info.turno,
+    aula: null
+  }
+
+  this.secciones.push(new_seccion)
   
 }
 
@@ -82,6 +98,15 @@ async getSeccion(codigo){
   })
   if(seccion.length >0){this.seccionSelected = seccion[0];}
 }
+
+async setExpandidos(expandidos){
+  this.treeSeccionsExpande =await  expandidos;
+}
+
+async getExpandidos(){
+  return await this.treeSeccionsExpande;
+}
+
   
 
 }
