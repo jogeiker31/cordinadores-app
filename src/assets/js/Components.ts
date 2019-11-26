@@ -17,6 +17,7 @@ import { ProfesorOcupadoComponent } from 'src/app/Components/dialog/profesor-ocu
 import { BorrarComponent } from 'src/app/Components/dialog/borrar/borrar.component';
 import { HorasExcedidasComponent } from 'src/app/Components/dialog/horas-excedidas/horas-excedidas.component';
 
+import { AulaComponent } from 'src/app/Components/aula/aula.component'
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -35,8 +36,10 @@ export const components = [AppComponent,
     RecoveryPasswordComponent,
     ProfesorOcupadoComponent,
     BorrarComponent,
-    HorasExcedidasComponent
+    HorasExcedidasComponent,
+    AulaComponent
     
     ]
 
-export const dialogs = [HorasExcedidasComponent,BorrarComponent,ProfesorOcupadoComponent,AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,UsuarioIncorrectoComponent]
+export const dialogs = [AulaComponent,HorasExcedidasComponent,BorrarComponent,ProfesorOcupadoComponent,AsignarMateriaComponent,AsignarMateriaSeccionComponent,AsignarAulaComponent,UsuarioIncorrectoComponent]
+    

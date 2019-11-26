@@ -8,6 +8,7 @@ import { SeccionesComponent } from 'src/app/Components/secciones/secciones.compo
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
 import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
+import { AulaComponent } from 'src/app/Components/aula/aula.component'
 
  const appRoutes: Routes = [
     { path: 'horario', component: HorarioComponent },
@@ -18,7 +19,8 @@ import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/
     {path: 'secciones', component: SeccionesComponent},
     {path: '', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
-    {path: 'forgotpassword', component:RecoveryPasswordComponent}
+    {path: 'forgotpassword', component:RecoveryPasswordComponent},
+    {path:'aula',component:AulaComponent}
   ];
 
 

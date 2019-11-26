@@ -15,10 +15,10 @@
               <label> Selecciona una Aula</label>
             <mat-form-field class="col s12">
             
-            <mat-label>Materias</mat-label>
+            <mat-label>Aulas</mat-label>
             <mat-select [(ngModel)]="AulaSelected">
-              <mat-option *ngFor="let aula of aulas" [value]="aula">
-                aula n°{{aula}}
+              <mat-option *ngFor="let aula of aulas" [value]="aula.aula">
+                aula n°{{aula.aula}}
               </mat-option>
             </mat-select>
           </mat-form-field>
