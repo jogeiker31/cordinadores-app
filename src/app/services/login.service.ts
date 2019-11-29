@@ -7,18 +7,24 @@ import { UsuariosService } from './usuarios.service';
 export class LoginService {
 
 userLog = null;
+nombreUser;
 
 async setUserLog(user){
+ 
   let info = {
     id: user.ci_coor,
-    user: user.usuario
+    user: user.usuario,
+    nombre_coor: `${user.nom_coor} ${user.ape_coor}`
   }
+  this.nombreUser = await info.nombre_coor
   await localStorage.setItem('userLogged',JSON.stringify(info))
+   
   this.getUserLog()
 }
 
 async getUserLog(){
    this.userLog = await JSON.parse(localStorage.getItem('userLogged'))
+   this.nombreUser = this.userLog.nombre_coor
    this.usuariosService.setUserConected(this.userLog.id)
 
 }

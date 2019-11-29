@@ -12,13 +12,16 @@ import { materials } from 'src/assets/js/materials';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxElectronModule } from 'ngx-electron';
+import { MateriasService } from './services/materias.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
-    components,
+    components
 
   ],
   imports: [
@@ -30,11 +33,12 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule,
     NgxElectronModule,
-    MatButtonModule
+    HttpClientModule
+    
      
     
   ],
-  providers: [],
+  providers: [MateriasService],
   entryComponents: [
     dialogs
     

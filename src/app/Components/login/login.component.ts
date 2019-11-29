@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
   
 
+
   async iniciarSesion(){
     let info = this.loginForm.value; // guardamos el valor del formulario en la variable info
     this.usuariosService.authUsuario(info.usuario,info.contra).subscribe((user)=>{

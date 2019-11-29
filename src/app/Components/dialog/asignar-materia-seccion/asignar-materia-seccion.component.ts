@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { materias, materiasPorSeccion } from 'src/assets/DB/materias';
 import { Router } from '@angular/router';
 import { ProfesoresService } from 'src/app/services/profesores.service';
+import { MateriasService } from 'src/app/services/materias.service';
 
 
 export interface AMSDATA {
@@ -27,7 +27,8 @@ export class AsignarMateriaSeccionComponent implements OnInit {
     
     @Inject(MAT_DIALOG_DATA) public data: AMSDATA,
     private router: Router,
-    public profesoresService:ProfesoresService
+    public profesoresService:ProfesoresService,
+    public materiasService:MateriasService
     ) {} // codigo angular para abrir dialogos
 
 
@@ -41,7 +42,7 @@ export class AsignarMateriaSeccionComponent implements OnInit {
    
   async getMaterias(){
     // Trae las materias correspondiente al semestre seleccionado
-    this.materiasPorSemestre = await materias.filter((mat)=>{
+    this.materiasPorSemestre = await this.materiasService.materias.filter((mat)=>{
       return mat.semestre_mat == this.data.semestre
     })
   }
@@ -71,7 +72,7 @@ export class AsignarMateriaSeccionComponent implements OnInit {
     let materia = value
     materia.codigo_seccion = this.data.seccion
     materia.id_mat_sec = id
-    materiasPorSeccion.push(materia)
+    this.materiasService.setMateriaSeccion(materia)
    
     
    this.onNoClick()
@@ -88,7 +89,7 @@ export class AsignarMateriaSeccionComponent implements OnInit {
 
   getNameOfMateria(code){
     // esto obtiene el nombre de la materia, ya que todo se maneja es por codigo y no todos los datos 
-    const materia = materias.filter((mat)=>{
+    const materia = this.materiasService.materias.filter((mat)=>{
       return mat.codigo_materia == code;
     })
     if(materia[0]){

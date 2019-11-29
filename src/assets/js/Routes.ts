@@ -7,7 +7,9 @@ import { ReloadComponent } from 'src/app/Components/reload/reload.component';
 import { SeccionesComponent } from 'src/app/Components/secciones/secciones.component';
 import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
-import { AulaComponent } from 'src/app/Components/aula/aula.component';
+import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
+import { AulaComponent } from 'src/app/Components/aula/aula.component'
+
  const appRoutes: Routes = [
     { path: 'horario', component: HorarioComponent },
     { path: 'inicio',      component: InicioComponent },
@@ -17,7 +19,8 @@ import { AulaComponent } from 'src/app/Components/aula/aula.component';
     {path: 'secciones', component: SeccionesComponent},
     {path: '', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
-    {path:'aulas',component:AulaComponent}
+    {path: 'forgotpassword', component:RecoveryPasswordComponent},
+    {path:'aula',component:AulaComponent}
   ];
 
 

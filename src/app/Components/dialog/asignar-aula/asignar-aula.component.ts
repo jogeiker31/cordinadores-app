@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { aulas } from 'src/assets/DB/horario';
+import { AulasService } from 'src/app/services/aulas.service';
 
 export interface AASDATA{
   seccion: object
@@ -18,7 +19,8 @@ export class AsignarAulaComponent implements OnInit {
     public asignarAulaDialog: MatDialogRef<AsignarAulaComponent>, // codigo angular para abrir dialogos
     
     @Inject(MAT_DIALOG_DATA) public data: AASDATA,
-    private router: Router
+    private router: Router,
+    public aulasService:AulasService
     ) {} // codigo angular para abrir dialogos
 
        
@@ -33,14 +35,14 @@ export class AsignarAulaComponent implements OnInit {
   
 
   asignarAula(seccion){
-    seccion.Aula = this.AulaSelected;
+    seccion.aula = this.AulaSelected;
     this.onNoClick()
   }
 
   aulas;
 
   async ngOnInit() {
-    this.aulas = aulas
+    this.aulas = await this.aulasService.getAulas();
   }
 
 
