@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsuariosService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   usuarios = [{
     ci_coor:'27040372',
@@ -51,17 +52,9 @@ setUserConected(id){
   this.userConected = this.getUsuario(id)
 }
 
-async authUsuario(usuario,contrasena){
-  let result = [];
-  result = await this.usuarios.filter((user)=>{
-    return user.usuario == usuario  && user.contra == contrasena;
-  })
+authUsuario(usuario,password){
+  return this.http.post('localhost:3000/api/usuario/auth',{usuario:usuario,password:password});
 
-  if(result.length > 0){
-    return result[0]
-  }else {
-    return null
-  }
 }
 
 }
