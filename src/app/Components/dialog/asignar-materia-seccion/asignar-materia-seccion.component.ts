@@ -40,16 +40,16 @@ export class AsignarMateriaSeccionComponent implements OnInit {
   }
 
    
-  async getMaterias(){
-    // Trae las materias correspondiente al semestre seleccionado
-    this.materiasPorSemestre = await this.materiasService.materias.filter((mat)=>{
-      return mat.semestre_mat == this.data.semestre
-    })
-  }
+  // async getMaterias(){
+  //   // Trae las materias correspondiente al semestre seleccionado
+  //   this.materiasPorSemestre = await this.materiasService.materias.filter((mat)=>{
+  //     return mat.semestre_mat == this.data.semestre
+  //   })
+  // }
 
   ngOnInit() {
 
-    this.getMaterias()
+    // this.getMaterias()
   }
 
 
@@ -88,15 +88,17 @@ export class AsignarMateriaSeccionComponent implements OnInit {
   materiasPorSemestre = [] // esta es la materia que se ven en el semestre seleccionado 
 
   getNameOfMateria(code){
-    // esto obtiene el nombre de la materia, ya que todo se maneja es por codigo y no todos los datos 
-    const materia = this.materiasService.materias.filter((mat)=>{
-      return mat.codigo_materia == code;
-    })
-    if(materia[0]){
-      return materia[0].nombre_mat
+    let nombre;
+    this.materiasService.getNombreDeMateria(code).subscribe((materia:any)=>{
+      nombre = materia.name
+    }
+      
+    )
+    if(nombre){
+      return nombre
     }
   }
-  
+
   profesoresDisponibles = this.profesoresService.getProfesores() // los profesores registrados en la base de datos
 
 

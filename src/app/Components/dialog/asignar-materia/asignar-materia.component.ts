@@ -211,15 +211,19 @@ export class AsignarMateriaComponent implements OnInit {
 
 
 
-  getNameOfMateria(code){
-    const materia = this.materiasServices.materias.filter((mat)=>{
-      return mat.codigo_materia == code;
-    })
-    if(materia[0]){
-      return materia[0].nombre_mat
+    getNameOfMateria(code){
+      let nombre;
+      this.materiasServices.getNombreDeMateria(code).subscribe((materia:any)=>{
+        nombre = materia.name
+      }
+        
+      )
+      if(nombre){
+        return nombre
+      }
     }
-  }
 
+    
   getNameOfMateriaById(id){
     let materia_id = this.materiasServices.materiasPorSeccion.filter((mat_id)=>{
       return mat_id.id_mat_sec == id

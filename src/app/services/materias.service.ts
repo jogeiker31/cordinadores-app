@@ -1,41 +1,31 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MateriasService {
-materias = [
-    {codigo_materia: 'MAT-12346',
-    nombre_mat:'Base de datos',horas_teo: 3, horas_pra:2,horas_lab:0,semestre_mat:1,carrera:'2614'},
-    {codigo_materia: 'MAT-22233',nombre_mat:'diseño de sistemas',horas_teo: 3, horas_pra:3,horas_lab:0,semestre_mat:6,carrera:'2614'},
-    {codigo_materia: 'MAT-34578',nombre_mat:'optimizacion no lineal',horas_teo: 4, horas_pra:3,horas_lab:0,semestre_mat:6,carrera:'2614'}
-  ]
+constructor(private http:HttpClient){}
 
 
 materiasPorSeccion = []
 
 getMaterias(){
-  return this.materias;
+  return this.http.get('http://localhost:3000/api/materia')
 }
 
 setMateria(data){
-  this.materias.push(data)
+  return this.http.post('http://localhost:3000/api/materia/create',data)
 }
 
 
 
 getMateria(id){
-  return this.materias.filter((mate)=>{
-    return mate.codigo_materia == id
-  })
+  return this.http.get(`http://localhost:3000/api/materia/${id}`)
 }
 
-async getNombreDeMateria(codigo){
-  let materia = await this.materias.filter((materia)=>{
-    return materia.codigo_materia == codigo
-  })
-
-  return materia[0].nombre_mat
+getNombreDeMateria(codigo){
+  return this.http.get(`http://localhost:3000/api/materia/name/${codigo}`)
 
 }
 
@@ -51,98 +41,94 @@ async getMateriasSeccion(seccion){
 }
 
 //Eliminar materia
-async deleteMateria(codigo){
-  let materias2 = await this.materias.filter((materia)=>{
-   return  materia.codigo_materia != codigo
-    
-    
-  })
+deleteMateria(codigo){
+  return this.http.delete(`http://localhost:3000/api/materia/${codigo}`)
+}
 
-  this.materias = materias2
+editMateria(data){
+  return this.http.put(`http://localhost:3000/api/materia/${data.codigo_materia}`,data)
 }
 
 
 
-
-
-//codigo
-async updateCodigo(codigo: string,value:string) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.codigo_materia = value
-    }
+// //codigo
+// async updateCodigo(codigo: string,value:string) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.codigo_materia = value
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
-//Materia
-async updateMateria(codigo: string ,value:string) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.nombre_mat = value//asegurate de que funcione
-    }
+// }
+// //Materia
+// async updateMateria(codigo: string ,value:string) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.nombre_mat = value//asegurate de que funcione
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
-//Semestre
-async updateSemestre(codigo: string,value ) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.semestre_mat = parseInt(value)
-    }
+// }
+// //Semestre
+// async updateSemestre(codigo: string,value ) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.semestre_mat = parseInt(value)
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
-//Horas Teoricas
-async updateHorasT(codigo: string,value ) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.horas_teo = parseInt(value)
-    }
+// }
+// //Horas Teoricas
+// async updateHorasT(codigo: string,value ) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.horas_teo = parseInt(value)
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
-//Horas Practicas
-async updateHorasP(codigo: string,value ) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.horas_pra = parseInt(value)
-    }
+// }
+// //Horas Practicas
+// async updateHorasP(codigo: string,value ) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.horas_pra = parseInt(value)
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
-//Horas Laboratorio
-async updateHorasL(codigo: string,value ) {
-  let materias2 = await this.materias.filter((materia)=>{
-    if(materia.codigo_materia == codigo){
-      materia.horas_lab = parseInt(value)
-    }
+// }
+// //Horas Laboratorio
+// async updateHorasL(codigo: string,value ) {
+//   let materias2 = await this.materias.filter((materia)=>{
+//     if(materia.codigo_materia == codigo){
+//       materia.horas_lab = parseInt(value)
+//     }
     
-     return  materia
+//      return  materia
      
-   })
-   this.materias = materias2
+//    })
+//    this.materias = materias2
    
-}
+// }
 
 
 }

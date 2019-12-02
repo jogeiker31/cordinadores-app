@@ -102,7 +102,11 @@ setUserConected(id){
 }
 
 authUsuario(usuario,password){
-  return this.http.post('localhost:3000/api/usuario/auth',{usuario:usuario,password:password});
+  return this.http.post('http://localhost:3000/api/usuario/auth',{usuario:usuario,password:password});
+
+}
+
+cambiarPassword(id){
 
 }
 

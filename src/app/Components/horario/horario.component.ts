@@ -35,11 +35,14 @@ export class HorarioComponent implements OnInit {
     
 
   getNameOfMateria(code){
-    const materia = this.materiasService.materias.filter((mat)=>{
-      return mat.codigo_materia == code;
-    })
-    if(materia[0]){
-      return materia[0].nombre_mat
+    let nombre;
+    this.materiasService.getNombreDeMateria(code).subscribe((materia:any)=>{
+      nombre = materia.name
+    }
+      
+    )
+    if(nombre){
+      return nombre
     }
   }
 

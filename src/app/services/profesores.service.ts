@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { filter } from 'minimatch';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 
 export interface Profesor {
@@ -11,12 +12,14 @@ export interface Profesor {
   horas_ocupadas:number
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProfesoresService {
+constructor(private http:HttpClient){}
 
-constructor() { }
+/* constructor() { }
 
 profesores: Profesor[] = [{
   ci_profesor:'27040372',
@@ -25,23 +28,32 @@ profesores: Profesor[] = [{
   cor_prof:'jogeiker1999@gmail.com',
   horas_est:30,
   horas_ocupadas:0 
-}];
+}]; */
 
+//Tomar profesores
 getProfesores(){
-  return this.profesores;
+  return this.http.get('http://localhost:3000/api/profesor')
 }
-
+//Tomar profesor
 getProfesor(id){
-  return this.profesores.filter((prof)=>{
-    return prof.ci_profesor == id
-  })
+  return this.http.get(`http://localhost:3000/api/profesor/${id}`)
 }
-
+//Guardar profesor
 setProfesor(data){
-  data.horas_ocupadas = 0;
-  this.profesores.push(data);
+  return this.http.post(`http://localhost:3000/api/profesor/create`,data)
 }
 
+//Eliminar profesor
+async deleteProfesor(codigo){
+  return this.http.delete(`http://localhost:3000/api/profesor/${codigo}`)
+}
+
+//Editar profesor
+editPofesor(data){
+  return this.http.put(`http://localhost:3000/api/profesor/${data.ci_profesor}`,data)
+}
+
+//Esto no  lo toque
  async sumarHoraProfesor(ci){
    await this.profesores.forEach((profesor)=>{
     if(profesor.ci_profesor === ci){
@@ -51,6 +63,7 @@ setProfesor(data){
   })
   
 }
+//Esto no  lo toque
 
 restarHoraProfesor(ci){
    this.profesores.forEach((profesor)=>{
@@ -60,6 +73,7 @@ restarHoraProfesor(ci){
   })
 }
 
+//Esto no  lo toque
 
 async profesorHorasDisponible(ci){
   let profesor = await this.profesores.filter((profesor)=>{
@@ -75,21 +89,10 @@ async profesorHorasDisponible(ci){
 
 }
 
-//Eliminar profesor
-async deleteProfesor(codigo){
-  let profesores2 = await this.profesores.filter((profesor)=>{
-   return  profesor.ci_profesor != codigo
-    
-    
-  })
-
-  this.profesores = profesores2
-}
 
 
 
-
-//CI
+/* //CI
 async updateCi(codigo: string,value) {
   let profesores2 = await this.profesores.filter((profesor)=>{
     if(profesor.ci_profesor == codigo){
@@ -154,6 +157,6 @@ async updateHorasT(codigo: string,value ) {
    this.profesores = profesores2
    
 }
-
+ */
 
 }
