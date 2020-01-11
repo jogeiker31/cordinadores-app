@@ -56,7 +56,8 @@ materiaCtrl.getNameOfMateria = async(req, res) => {
 materiaCtrl.deleteMateria = async(req, res) => {
     console.log(req.params)
     let user = Materia.findOneAndDelete({ codigo_materia: req.params.id }).then(() => {
-            res.json({ 'status': true })
+            res.json({ 'status': true,
+'id':req.params.id })
 
         })
         .catch((e) => {

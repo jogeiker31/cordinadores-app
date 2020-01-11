@@ -53,7 +53,7 @@ aulaCtrl.updateAula = async(res, req) => {
         estado: req.body.estado,
         ocupada: req.body.ocupada,
     }
-    Aula.findByIdAndUpdate({ aula: req.param.id }, { $set, aula })
+    Aula.findOneAndUpdate({ aula: req.param.id }, { $set, aula })
         .then((aula) => {
             res.json(aula)
         })
@@ -65,7 +65,7 @@ aulaCtrl.updateAula = async(res, req) => {
 }
 
 aulaCtrl.deleteAula = async(res, req) => {
-    Aula.findByIdAndDelete({ aula: req.param.id })
+    Aula.findOneAndDelete({ aula: req.param.id })
         .then(() => {
             res.json({ "status": true })
         })

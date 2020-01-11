@@ -62,12 +62,13 @@ profesorCtrl.getNameProfesor = async(req, res) => {
 }
 
 profesorCtrl.deleteProfesor = async(req, res) => {
-    let user = Profesor.findByIdAndDelete({ ci_profesor: req.params.id })
+    let user = Profesor.findOneAndDelete({ ci_profesor: req.params.id })
         .then(() => {
             res.json({ 'status': true })
         })
         .catch((err) => {
-            res.json({ 'status': false })
+            res.json({ 'status': false,
+'id':req.params.id })
         })
 }
 
@@ -82,7 +83,7 @@ profesorCtrl.updateProfesor = async(req, res) => {
         tipo: req.body.tipo
     }
 
-    Profesor.findByIdAndUpdate({ ci_profesor: req.params.id }, { $set: profesor })
+    Profesor.findOneAndUpdate({ ci_profesor: req.params.id }, { $set: profesor })
         .then((profesor) => {
             res.json(profesor)
         })
