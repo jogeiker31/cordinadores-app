@@ -8,9 +8,9 @@ const ProfesorSchema = new Schema({
     nom_prof: { type: String, required: true },
     ape_prof: { type: String, required: true },
     cor_prof: { type: String, required: true, unique: true },
-    horas_est: { type: Number, required: true },
-    horas_ocupadas: { type: Number, required: true },
-    tipo: { type: String, enum: ["TV", "MT", "TC", "Dedicación exclusiva"] }
+    horas_est: { type: Number, required: true }
+    // horas_ocupadas: { type: Number, required: true },
+    //tipo: 
 });
 
 module.exports = mongoose.model('Profesor', ProfesorSchema)

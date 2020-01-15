@@ -29,8 +29,8 @@ profesorCtrl.createProfesor = async(req, res) => {
         ape_prof: req.body.ape_prof,
         cor_prof: req.body.cor_prof,
         horas_est: req.body.horas_est,
-        horas_ocupadas: req.body.horas_ocupadas,
-        tipo: req.body.tipo
+        /*  horas_ocupadas: req.body.horas_ocupadas,
+         tipo: req.body.tipo */
     });
 
     await profesor.save().then(() => {
@@ -74,8 +74,8 @@ profesorCtrl.updateProfesor = async(req, res) => {
         ape_prof: req.body.ape_prof,
         cor_prof: req.body.cor_prof,
         horas_est: req.body.horas_est,
-        horas_ocupadas: req.body.horas_ocupadas,
-        tipo: req.body.tipo
+        /*  horas_ocupadas: req.body.horas_ocupadas,
+         tipo: req.body.tipo */
     }
 
     Profesor.findOneAndUpdate({ ci_profesor: req.params.id }, { $set: profesor })

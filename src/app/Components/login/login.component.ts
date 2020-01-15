@@ -45,11 +45,21 @@ export class LoginComponent implements OnInit {
 
 
   async iniciarSesion(){
+   
     let info = this.loginForm.value; // guardamos el valor del formulario en la variable info
     this.usuariosService.authUsuario(info.usuario,info.contra).subscribe((user)=>{
       if( user !== null){ // si no es null entonces permite la entrada al sistema
         this.loginService.setUserLog(user) // le manda al loginService la informacion del usuario que ingreso al sistema
-        this.router.navigateByUrl('/inicio') // redirecciona al inicio de la app
+        this.loginService.adminuser(user)
+
+          
+        
+          this.router.navigateByUrl('/inicio') // redirecciona al inicio de la app
+      
+       
+        /////////////////////////////
+       
+        
       }else {
         this.usuarioIncorrecto() // si es null entonces se desplegara la ventana modal indicando el error
       }

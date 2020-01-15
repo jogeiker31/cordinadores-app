@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'sidenav-content',
   templateUrl: './sidenav-content.component.html',
@@ -7,12 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavContentComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public loginService:LoginService) { }
+  links=[]
+  admin = this.loginService.admin 
+  
   ngOnInit() {
-  }
-
-  links = [
+    console.log(this.admin)
+    if(this.admin == true){
+      this.links=[
+        {url:'/usuarios',nombre:'Usuarios'},
+        {url:'/carreras',nombre:'Carreras'},
+        
+      ]
+    }else{
+ this.links = [
     {url:'/horario',nombre:'Horario'},
     {url:'/profesores',nombre:'Profesores'},
     {url: '/materias',nombre:'materias'},
@@ -21,6 +29,13 @@ export class SidenavContentComponent implements OnInit {
     
   ]
   
+
+    }
+  }
+
+
+
+ 
 
 
 }

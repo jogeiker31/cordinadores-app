@@ -110,4 +110,14 @@ cambiarPassword(id){
 
 }
 
+SetUsuario(data){
+  return this.http.post('http://localhost:3000/api/usuario/create',data)
+}
+GetUsuarios(){
+  return this.http.get('http://localhost:3000/api/usuario')
+}
+deleteUsuarios(data){
+  return this.http.delete(`http://localhost:3000/api/usuario/${data.ci_coor}`,data)
+}
+
 }

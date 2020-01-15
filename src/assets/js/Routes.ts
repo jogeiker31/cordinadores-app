@@ -9,6 +9,10 @@ import { LoginComponent } from 'src/app/Components/login/login.component';
 import { LogoutComponent } from 'src/app/Components/logout/logout.component';
 import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/recovery-password.component';
 import { AulaComponent } from 'src/app/Components/aula/aula.component'
+import { VistaAdminComponent } from '../../app/Components/vista-admin/vista-admin.component';
+import { CoordinadoresComponent } from '../../app/Components/coordinadores/coordinadores.component';
+import { CarrerasComponent } from '../../app/Components/carreras/carreras.component';
+import { UsuariosComponent } from '../../app/Components/usuarios/usuarios.component';
 
  const appRoutes: Routes = [
     { path: 'horario', component: HorarioComponent },
@@ -20,7 +24,11 @@ import { AulaComponent } from 'src/app/Components/aula/aula.component'
     {path: '', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'forgotpassword', component:RecoveryPasswordComponent},
-    {path:'aula',component:AulaComponent}
+    {path:'aula',component:AulaComponent},
+    {path:'vadmin',component:VistaAdminComponent},
+    {path:'coordinadores',component:CoordinadoresComponent},
+    {path:'carreras',component:CarrerasComponent},
+    {path:'usuarios',component:UsuariosComponent}
   ];
 
 

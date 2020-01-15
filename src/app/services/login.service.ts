@@ -8,6 +8,20 @@ export class LoginService {
 
 userLog = null;
 nombreUser;
+admin=null;
+ adminuser(user){
+  let role = {
+    role:user.role
+  } 
+  
+  if(role.role == 'admin'){
+
+    console.log(role.role)
+    this.admin = true
+  }else{
+    return false
+  }
+}
 
 async setUserLog(user){
  
@@ -18,7 +32,7 @@ async setUserLog(user){
   }
   this.nombreUser = await info.nombre_coor
   await localStorage.setItem('userLogged',JSON.stringify(info))
-   
+  
   this.getUserLog()
 }
 

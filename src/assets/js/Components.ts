@@ -16,8 +16,12 @@ import { RecoveryPasswordComponent } from 'src/app/Components/recovery-password/
 import { ProfesorOcupadoComponent } from 'src/app/Components/dialog/profesor-ocupado/profesor-ocupado.component';
 import { BorrarComponent } from 'src/app/Components/dialog/borrar/borrar.component';
 import { HorasExcedidasComponent } from 'src/app/Components/dialog/horas-excedidas/horas-excedidas.component';
+import { VistaAdminComponent } from 'src/app/Components/vista-admin/vista-admin.component';
 
 import { AulaComponent } from 'src/app/Components/aula/aula.component'
+import { CoordinadoresComponent } from '../../app/Components/coordinadores/coordinadores.component';
+import { CarrerasComponent } from '../../app/Components/carreras/carreras.component';
+import { UsuariosComponent } from '../../app/Components/usuarios/usuarios.component';
 
 export const components = [AppComponent,
     HorarioComponent,
@@ -37,7 +41,11 @@ export const components = [AppComponent,
     ProfesorOcupadoComponent,
     BorrarComponent,
     HorasExcedidasComponent,
-    AulaComponent
+    AulaComponent,
+    VistaAdminComponent,
+    CoordinadoresComponent,
+    CarrerasComponent,
+    UsuariosComponent
     
     ]
 
