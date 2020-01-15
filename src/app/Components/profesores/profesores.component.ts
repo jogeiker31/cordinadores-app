@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialogRef, MatDialog, MatTextareaAutosize } from '@angular/material';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfesoresService } from 'src/app/services/profesores.service';
 import { BorrarComponent } from '../dialog/borrar/borrar.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -33,13 +34,19 @@ export class ProfesoresComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  this.profesoresService.getProfesores().subscribe((profesores:any)=>{
+this.dataSource = new MatTableDataSource(profesores);
+this.dataSource.paginator = this.paginator;
+this.dataSource.sort = this.sort;
+  })
+  
+    /*   this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; */
   }
 
 
   displayedColumns: string[] = ['ci', 'nom_prof', 'ape_prof', 'correo_prof','h_e','boton','botonE'];
-  dataSource = new MatTableDataSource(this.profesoresService.getProfesores());
+  dataSource /* = new MatTableDataSource(this.profesoresService.getProfesores()); */
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -67,13 +74,16 @@ export class ProfesoresComponent implements OnInit {
 
 
   guardarProfesor(){
-   this.profesoresService.setProfesor(this.profesoresForm.value)
-    
+   this.profesoresService.setProfesor(this.profesoresForm.value).subscribe((profesor)=>{
     this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
     {
       this.router.navigate(['/profesores'])
       
     }); 
+
+   });
+    
+    
     
   }
 
@@ -86,12 +96,13 @@ export class ProfesoresComponent implements OnInit {
 
     await borrarDialog.afterClosed().subscribe((result)=>{
       if(result){
-        this.profesoresService.deleteProfesor(code)
-        this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
-    {
-      this.router.navigate(['/profesores'])
+        this.profesoresService.deleteProfesor(code).subscribe((msg)=>{
+          this.router.navigateByUrl('/reload', {skipLocationChange: true})
+          .then(()=>{
+            this.router.navigate(['/profesores']) 
+          }); 
+        });
       
-    }); 
       }
     })
     
@@ -113,13 +124,41 @@ profesoresE  = new FormGroup({
   
 });
 
+get CI_prof() {return this.profesoresE.get('ci_profesor')}
+get nombre_prof() {return this.profesoresForm.get('nom_prof')}
+get apellido_prof() {return this.profesoresForm.get('ape_prof')}
+get correo_prof() {return this.profesoresForm.get('cor_prof')}
+get horas_T() { return this.profesoresForm.get('horas_est')}
+
+
+
+editarProfesor(code){
+this.profesoresService.getProfesor(code).subscribe((profesor:any)=>{
+  delete(profesor._id)
+  delete(profesor.__v)
+  this.profesoresE.setValue(profesor)
+})
+}
+
+
+
+SaveEdit(){
+  this.profesoresService.editPofesor(this.profesoresE.value).subscribe((profesor:any)=>{
+    this.router.navigateByUrl('/reload', {skipLocationChange: true})
+    .then(()=>{
+    this.router.navigate(['/profesores'])
+  }); 
+})
+}
+/* 
 CI:string;
 nombre:string;
 apellido:number;
 correo:number;
 horaT:number;
 
-
+ */
+/* 
 //CI
 async editarCI(code){
   if(this.profesoresE.value.CI_prof == '' ){
@@ -230,6 +269,6 @@ async editarHorasT(code){
     
   }); 
 }//else
-}
+} */
 
 }

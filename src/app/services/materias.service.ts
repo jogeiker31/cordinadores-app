@@ -38,6 +38,11 @@ async getMateriasSeccion(seccion){
     return materia.codigo_seccion ==  seccion;
   })
   return materias
+  /* let materias:any = this.getMaterias()
+  let materi = await materias.filter((materia)=>{
+return materia.codigo_seccion == seccion
+  })
+  return materi */
 }
 
 //Eliminar materia

@@ -44,7 +44,7 @@ setProfesor(data){
 }
 
 //Eliminar profesor
-async deleteProfesor(codigo){
+ deleteProfesor(codigo){
   return this.http.delete(`http://localhost:3000/api/profesor/${codigo}`)
 }
 
@@ -53,29 +53,43 @@ editPofesor(data){
   return this.http.put(`http://localhost:3000/api/profesor/${data.ci_profesor}`,data)
 }
 
+
 //Esto no  lo toque
- async sumarHoraProfesor(ci){
-   await this.profesores.forEach((profesor)=>{
+   async sumarHoraProfesor(ci){
+  /*  await this.profesores.forEach((profesor)=>{
     if(profesor.ci_profesor === ci){
       profesor.horas_ocupadas = profesor.horas_ocupadas + 1;
       
     }
-  })
-  
+  }) */
+ await this.getProfesor(ci).subscribe((profesor:any)=>{
+  delete(profesor._id)
+  delete(profesor._v)
+profesor.hora_ocupadas = profesor.hora_ocupadas + 1
+this.editPofesor(profesor.ci_profesor)
+})
+
+
 }
 //Esto no  lo toque
 
-restarHoraProfesor(ci){
-   this.profesores.forEach((profesor)=>{
+ restarHoraProfesor(ci){
+ /*   this.profesores.forEach((profesor)=>{
     if(profesor.ci_profesor === ci){
       profesor.horas_ocupadas = profesor.horas_ocupadas - 1;
     }
+  }) */
+  this.getProfesor(ci).subscribe((profesor:any)=>{
+    delete(profesor._id)
+    delete(profesor._v)
+    profesor.hora_ocupadas = profesor.hora_ocupadas + 1
+this.editPofesor(profesor)
   })
 }
 
 //Esto no  lo toque
 
-async profesorHorasDisponible(ci){
+profesorHorasDisponible(ci){/* 
   let profesor = await this.profesores.filter((profesor)=>{
     return profesor.ci_profesor == ci
   }) 
@@ -84,7 +98,14 @@ async profesorHorasDisponible(ci){
     return false
   }else{
     return true
-  }
+  } */
+  this.getProfesor(ci).subscribe((profesor:any)=>{
+    if(profesor.horas_ocupadas >= profesor.horas_est){
+      return false
+    }else{
+      return true
+    }
+  })
 
 
 }

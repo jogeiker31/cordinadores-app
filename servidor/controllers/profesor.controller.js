@@ -3,27 +3,22 @@ const Profesor = require('../models/profesor');
 const profesorCtrl = {};
 
 profesorCtrl.getProfesor = async(req, res) => {
-    await Profesor.findOne({ ci_profesor: req.params.id })
-        .then((profesor) => {
-            res.json(profesor)
+    await Profesor.findOne({ ci_profesor: req.params.id }).then((profesor) => {
+        res.json(profesor)
+    }).catch((err) => {
+        res.json({
+            'error': err
         })
-        .catch((err) => {
-            res.json({
-                'error': err
-            })
-            res.status(404)
-        })
+        res.status(404)
+    })
 }
 
 profesorCtrl.getProfesores = async(req, res) => {
-    Profesor.find()
-        .then((profesores) => {
+    Profesor.find().then((profesores) => {
             res.json(profesores)
         })
         .catch((err) => {
-            res.json({
-                'error': err
-            })
+            res.json(err);
         })
 }
 
@@ -38,14 +33,14 @@ profesorCtrl.createProfesor = async(req, res) => {
         tipo: req.body.tipo
     });
 
-    await profesor.save()
-        .then(() => {
+    await profesor.save().then(() => {
             res.status(200);
             res.json({
                 'status': 'ok'
             })
         })
         .catch((err) => {
+            console.log(err)
             res.json({
                 'status': err
             })
@@ -62,7 +57,8 @@ profesorCtrl.getNameProfesor = async(req, res) => {
 }
 
 profesorCtrl.deleteProfesor = async(req, res) => {
-    let user = Profesor.findByIdAndDelete({ ci_profesor: req.params.id })
+    console.log(req.params)
+    let user = Profesor.findOneAndDelete({ ci_profesor: req.params.id })
         .then(() => {
             res.json({ 'status': true })
         })
@@ -82,7 +78,7 @@ profesorCtrl.updateProfesor = async(req, res) => {
         tipo: req.body.tipo
     }
 
-    Profesor.findByIdAndUpdate({ ci_profesor: req.params.id }, { $set: profesor })
+    Profesor.findOneAndUpdate({ ci_profesor: req.params.id }, { $set: profesor })
         .then((profesor) => {
             res.json(profesor)
         })

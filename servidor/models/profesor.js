@@ -13,4 +13,4 @@ const ProfesorSchema = new Schema({
     tipo: { type: String, enum: ["TV", "MT", "TC", "Dedicación exclusiva"] }
 });
 
-module.exports = mongoose.model("Profesor", ProfesorSchema)
+module.exports = mongoose.model('Profesor', ProfesorSchema)

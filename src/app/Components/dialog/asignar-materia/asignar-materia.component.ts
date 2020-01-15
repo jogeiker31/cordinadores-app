@@ -89,13 +89,23 @@ export class AsignarMateriaComponent implements OnInit {
 
 
   async profesorHorasDisponibles(ci){
-    if(await this.profesoresServices.profesorHorasDisponible(ci)){
+
+   let profesor = await this.profesoresServices.profesorHorasDisponible(ci)
+
+   if(true){
+    return true
+  }else{
+    let profesor = await this.profesoresServices.getProfesor(ci)
+    this.asignarMateriaDialog.close({nombre: profesor[0].nom_prof,apellido: profesor[0].ape_prof,err:'horasExcedidas'})
+    return false
+  }
+ /*    if(await this.profesoresServices.profesorHorasDisponible(ci)){
       return true
     }else{
       let profesor = await this.profesoresServices.getProfesor(ci)
       this.asignarMateriaDialog.close({nombre: profesor[0].nom_prof,apellido: profesor[0].ape_prof,err:'horasExcedidas'})
       return false
-    }
+    } */
   }
 
 

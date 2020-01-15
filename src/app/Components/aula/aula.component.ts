@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AulasService } from 'src/app/services/aulas.service'
 import { BorrarComponent } from '../dialog/borrar/borrar.component';
+import { Materias } from '../../services/materias.service';
 
 @Component({
   selector: 'aula',
@@ -24,12 +25,17 @@ export class AulaComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   /*  this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; */
+    this.aulasevice.getAulas().subscribe((aulas:any)=>{
+this.dataSource = new MatTableDataSource(aulas);
+this.dataSource.paginator = this.paginator;
+this.dataSource.sort = this.sort;
+    })
   }
 
   displayedColumns: string[] = ['aula','boton','botonE'];
-  dataSource = new MatTableDataSource(this.aulasevice.getAulas());
+  dataSource 
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -47,13 +53,16 @@ get aula() {return this.AulaForm.get('aula')};
 
 
 guardaraula(){
-  this.aulasevice.setAula(this.AulaForm.value)
-  
-  this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+  this.aulasevice.setAula(this.AulaForm.value).subscribe((aula)=>{
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
   {
     this.router.navigate(['/aula'])
     
   }); 
+
+  })
+  
+  
   
 }
 
@@ -66,13 +75,15 @@ async borraraula(code){
 
   await borrarDialog.afterClosed().subscribe((result)=>{
     if(result){
-       this.aulasevice.deleteAula(code) //editar servicio para aulas
-
-      this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+       this.aulasevice.deleteAula(code).subscribe((msg)=>{
+         this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
       {
         this.router.navigate(['/aula'])
         
       }); 
+       })
+
+      
     }
   })
 
@@ -88,12 +99,32 @@ tomaraula:number;
 aulaE  = new FormGroup({
   aula_e: new FormControl('')
 });
-aulaV:number;
+
+get aula_e() {return this.AulaForm.get('aula')};
+//aulaV:number;
 
 
 
 //Editar
-async editaraula(code){
+EditarAula(code){
+  this.aulasevice.getAula(code).subscribe((aula:any)=>{
+    delete(aula._id)
+    delete(aula.__v)
+    this.aulaE.setValue(aula)
+  })
+}
+
+SaveEdit(){
+  this.aulasevice.updateAula(this.aulaE.value).subscribe((aula:any)=>{
+    console.log(aula)
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    {
+      this.router.navigate(['/aula'])
+      
+    }); 
+  })
+}
+/* async editaraula(code){
   if(this.aulaE.value.aula_e == '' ){
     
     await this.aulasevice.updateAula(code,this.aulaV)//no esta leyendo el valor REVISAR
@@ -114,7 +145,7 @@ async editaraula(code){
     
   }); 
                                 } //el del else      
-}
+} */
 
 
 

@@ -38,13 +38,13 @@ constructor(private http:HttpClient) { }
   }
 
   //eliminar aula
-  async deleteAula(codigo){
+   deleteAula(codigo){
     return this.http.delete(`http://localhost:3000/api/aula/${codigo}`)
   }
 
   //editar aula
-  async updateAula(codigo){ 
-    return this.updateAula(`http://localhost:3000/api/aula/${codigo}`)
+   updateAula(codigo){ 
+    return this.http.put(`http://localhost:3000/api/aula/${codigo.aula}`,codigo)
 }
 
 
