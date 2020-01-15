@@ -63,7 +63,10 @@ profesorCtrl.deleteProfesor = async(req, res) => {
             res.json({ 'status': true })
         })
         .catch((err) => {
-            res.json({ 'status': false })
+            res.json({
+                'status': false,
+                'id': req.params.id
+            })
         })
 }
 
