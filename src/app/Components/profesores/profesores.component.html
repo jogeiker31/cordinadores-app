@@ -105,7 +105,7 @@
             <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
                 <div *ngIf="tomarCI == profesor.ci_profesor && edit ">
                     <form class="col s1" [formGroup]="profesoresE">
-                        <input type="text " matInput formControlName="CI_prof" placeholder="{{profesor.ci_profesor}} ">
+                        <input type="text " matInput formControlName="ci_profesor" placeholder="{{profesor.ci_profesor}} ">
 
                     </form>
                 </div>
@@ -127,7 +127,7 @@
             <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
                 <div *ngIf="tomarCI == profesor.ci_profesor && edit ">
                     <form class="col s1" [formGroup]="profesoresE">
-                        <input type="text" matInput class="browser-default" formControlName="nombre_prof" placeholder="{{profesor.nom_prof}} ">
+                        <input type="text" matInput class="browser-default" formControlName="nom_prof" placeholder="{{profesor.nom_prof}} ">
 
                     </form>
                 </div>
@@ -149,7 +149,7 @@
             <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
                 <div *ngIf="tomarCI == profesor.ci_profesor && edit ">
                     <form class="col s1" [formGroup]="profesoresE">
-                        <input type="text" matInput class="browser-default" class="validate" formControlName="apellido_prof" placeholder="{{profesor.ape_prof}}">
+                        <input type="text" matInput class="browser-default" class="validate" formControlName="ape_prof" placeholder="{{profesor.ape_prof}}">
 
                     </form>
                 </div>
@@ -171,7 +171,7 @@
             <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
                 <div *ngIf="tomarCI == profesor.ci_profesor && edit ">
                     <form class="col s1" [formGroup]="profesoresE">
-                        <input type="text" class="validate" matInput formControlName="correo_prof" placeholder="{{profesor.cor_prof}} ">
+                        <input type="text" class="validate" matInput formControlName="cor_prof" placeholder="{{profesor.cor_prof}} ">
 
                     </form>
                 </div>
@@ -192,7 +192,7 @@
             <td mat-cell *matCellDef="let profesor" [ngClass]="{'seleccionado':edit && tomarCI == profesor.ci_profesor  ,'noseleccionado':!edit}">
                 <div *ngIf="tomarCI == profesor.ci_profesor && edit ">
                     <form class="col s1" [formGroup]="profesoresE">
-                        <input type="number" matInput class="validate" formControlName="hora_T" placeholder="{{profesor.horas_est}} ">
+                        <input type="number" matInput class="validate" formControlName="horas_est" placeholder="{{profesor.horas_est}} ">
 
                     </form>
                 </div>
@@ -233,7 +233,7 @@
 
 
                 <div *ngIf="!edit">
-                    <button (click)="editarProfesor()" (click)="edit=true" (click)="tomarCI = profesor.ci_profesor " mat-icon-button>
+                    <button (click)="editarProfesor(profesor.ci_profesor)" (click)="edit=true" (click)="tomarCI = profesor.ci_profesor " mat-icon-button>
                    <mat-icon>edit</mat-icon>
                 </button>
                 </div>

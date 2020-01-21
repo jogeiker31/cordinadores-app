@@ -9,7 +9,7 @@ aulaCtrl.getAulas = async(req, res) => {
         })
         .catch((err) => {
             res.json({
-                "error": err
+                'error': err
             })
         })
 }
@@ -21,7 +21,7 @@ aulaCtrl.getAula = async(req, res) => {
         })
         .catch((err) => {
             res.json({
-                "error": err
+                'error': err
             })
             res.status(404)
         })
@@ -29,21 +29,22 @@ aulaCtrl.getAula = async(req, res) => {
 
 aulaCtrl.createAula = async(req, res) => {
     const aula = new Aula({
-        aula: req.body.aula,
-        /* estado: req.body.estado,
-        ocupada: req.body.ocupada, */
+        aula: req.body.aula
+            /* estado: req.body.estado,
+            ocupada: req.body.ocupada, */
     })
+    console.log(aula.aula)
     await aula.save()
         .then(() => {
             res.status(200)
             res.json({
-                "status": "ok"
+                'status': "ok"
             })
         })
         .catch((err) => {
-            console.log(err)
+
             res.json({
-                "status": err
+                'status': err
             })
         })
 }
@@ -57,10 +58,11 @@ aulaCtrl.updateAula = async(req, res) => {
     Aula.findOneAndUpdate({ aula: req.param.id }, { $set: aula })
         .then((aula) => {
             res.json(aula)
+
         })
         .catch((err) => {
             res.json({
-                "status": err
+                'status': err
             })
         })
 }
@@ -68,10 +70,10 @@ aulaCtrl.updateAula = async(req, res) => {
 aulaCtrl.deleteAula = async(req, res) => {
     let aul = Aula.findOneAndDelete({ aula: req.param.id })
         .then(() => {
-            res.json({ "status": true })
+            res.json({ 'status': true })
         })
         .catch((err) => {
-            res.json({ "status": false })
+            res.json({ 'status': false })
         })
 }
 

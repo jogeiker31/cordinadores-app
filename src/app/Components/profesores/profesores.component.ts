@@ -116,19 +116,19 @@ tomarCI:any;
 
 
 profesoresE  = new FormGroup({
-  CI_prof: new FormControl('',[Validators.maxLength(8),Validators.pattern('^[0-9]{1,8}$')]),
-  nombre_prof: new FormControl(''),
-  apellido_prof: new FormControl(''),
-  correo_prof: new FormControl('',[Validators.email]),
-  hora_T: new FormControl(''),
+  ci_profesor: new FormControl('',[Validators.maxLength(8),Validators.pattern('^[0-9]{1,8}$')]),
+  nom_prof: new FormControl(''),
+  ape_prof: new FormControl(''),
+  cor_prof: new FormControl('',[Validators.email]),
+  horas_est: new FormControl(''),
   
 });
 
-get CI_prof() {return this.profesoresE.get('ci_profesor')}
-get nombre_prof() {return this.profesoresForm.get('nom_prof')}
-get apellido_prof() {return this.profesoresForm.get('ape_prof')}
-get correo_prof() {return this.profesoresForm.get('cor_prof')}
-get horas_T() { return this.profesoresForm.get('horas_est')}
+get ci_profesorE() {return this.profesoresE.get('ci_profesor')}
+get nom_profE() {return this.profesoresForm.get('nom_prof')}
+get ape_profE() {return this.profesoresForm.get('ape_prof')}
+get cor_profE() {return this.profesoresForm.get('cor_prof')}
+get horas_estE() { return this.profesoresForm.get('horas_est')}
 
 
 

@@ -42,7 +42,7 @@
             <td mat-cell *matCellDef="let aulaA" [ngClass]="{'seleccionado':edit && tomaraula == aulaA.aula  ,'noseleccionado':!edit}">
                 <div *ngIf="tomaraula == aulaA.aula && edit ">
                     <form class="col s1" [formGroup]="aulaE">
-                        <input type="number " min="0" matInput formControlName="aula_e" placeholder="{{aulaA.aula}}">
+                        <input type="number " min="0" matInput formControlName="aula" placeholder="{{aulaA.aula}}">
 
                     </form>
                 </div>
@@ -85,7 +85,7 @@
 
 
                 <div *ngIf="!edit">
-                    <button (click)="edit=true" (click)="EditarAula()" (click)="tomaraula = aulaA.aula " mat-icon-button>
+                    <button (click)="EditarAula(aulaA.aula)" (click)="edit=true" (click)="tomaraula = aulaA.aula " mat-icon-button>
                          <mat-icon>build</mat-icon>
                       </button>
                 </div>

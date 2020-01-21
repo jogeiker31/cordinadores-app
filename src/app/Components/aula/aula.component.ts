@@ -97,10 +97,10 @@ edit:false;//para los botones de editar, si es false no es editable
 tomaraula:number; 
 
 aulaE  = new FormGroup({
-  aula_e: new FormControl('')
+  aula: new FormControl('')
 });
 
-get aula_e() {return this.AulaForm.get('aula')};
+get aulae() {return this.AulaForm.get('aula')};
 //aulaV:number;
 
 
@@ -108,6 +108,9 @@ get aula_e() {return this.AulaForm.get('aula')};
 //Editar
 EditarAula(code){
   this.aulasevice.getAula(code).subscribe((aula:any)=>{
+    console.log(this.tomaraula)
+
+    console.log(aula)
     delete(aula._id)
     delete(aula.__v)
     this.aulaE.setValue(aula)
@@ -116,7 +119,7 @@ EditarAula(code){
 
 SaveEdit(){
   this.aulasevice.updateAula(this.aulaE.value).subscribe((aula:any)=>{
-    console.log(aula)
+    
     this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
     {
       this.router.navigate(['/aula'])
